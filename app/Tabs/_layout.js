@@ -40,9 +40,9 @@ export default function Layout() {
           {() => <StackNavigator />}
         </Tabs.Group>
         <Tabs.Screen
-          name="Calendar"
+          name="Planner"
           options={{
-            tabBarLabel: "calendar",
+            tabBarLabel: "Planner",
             tabBarLabelStyle: { color: "#7CB9E8" },
             headerShown:false,
             tabBarIcon:({focused}) => 
