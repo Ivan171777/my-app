@@ -2,6 +2,8 @@ import React from "react";
 import { Tabs } from "expo-router";
 import { FontAwesome, AntDesign, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import StackNavigator from "C:/Users/Ivan/build/my-app/app/Tabs/Fitness/StackNavigator";
+import StackNavigatorPlanner from 'C:/Users/Ivan/build/my-app/app/Tabs/Planner/navigation/StackNavigatorPlanner';
+import StackNavigatorHome from 'C:/Users/Ivan/build/my-app/app/Tabs/Home/StackNavigatorHome';
 
 export default function Layout() {
   return (
@@ -20,7 +22,7 @@ export default function Layout() {
             )
           }}
         />
-        
+        {() => <StackNavigatorHome />}
         <Tabs.Screen
           name="Fitness"
           options={{
@@ -34,11 +36,12 @@ export default function Layout() {
               <Ionicons name="fitness" size={24} color="black" />
             )
           }}
-        ></Tabs.Screen>
-          <Tabs.Group>
-          {/* Внутри каждой вкладки используйте StackNavigator */}
+        >
+
+        </Tabs.Screen>
+          
           {() => <StackNavigator />}
-        </Tabs.Group>
+
         <Tabs.Screen
           name="Planner"
           options={{
@@ -52,7 +55,10 @@ export default function Layout() {
               <AntDesign name="calendar" size={24} color="black" />
             )
           }}
-        />
+          />
+          
+          {() => <StackNavigatorPlanner />}
+        
         <Tabs.Screen
           name="Profile"
           options={{
