@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { BottomModal } from "react-native-modals";

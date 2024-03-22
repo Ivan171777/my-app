@@ -353,7 +353,7 @@ import {
                 onPress={() => deleteItems(date)}
                 style={{position: 'absolute', bottom: 5, right: 10}}>
                 <Text style={{fontSize: 10, fontWeight: '500', color: 'gray'}}>
-                  del
+                  Del
                 </Text>
               </Pressable>
             </Pressable>
@@ -383,7 +383,19 @@ import {
     };
     return (
       <>
-        <ScrollView style={{marginTop: 50}}>
+      <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: "white",
+        width: "100%",
+        height: "7%",
+      }}>
+      <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
+        Planner
+      </Text>
+    </View>
+        <ScrollView style={{marginTop: 0}}>
           <View
             style={{
               flex: 1,

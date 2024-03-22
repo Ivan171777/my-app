@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from '@expo/vector-icons';
 
 const RestScreen = () => {
   const navigation = useNavigation();
@@ -23,14 +24,10 @@ const RestScreen = () => {
   });
   return (
     <SafeAreaView
-    style={{ backgroundColor: "black", height: "100%"}}>
-      <Image
-        // resizeMode="contain"
-        source={{
-          uri: "https://raw.githubusercontent.com/Ivan171777/VKR/main/Rest_Icon.jpg",
-        }}
-        style={{ width: 400, height: 400, borderRadius: 40, marginLeft: 13}}
-      />
+    style={{ backgroundColor: "white", height: "100%"}}>
+      <View style={{ width: "80%", height: "50%", marginLeft: 45, borderRadius: 30, marginTop: 50, backgroundColor: "black", alignContent: "center" }}>
+          <MaterialIcons style={{marginHorizontal: 70, marginVertical: 90}} name="restore" size={190} color="white" />
+        </View>
 
       <Text
         style={{
@@ -38,10 +35,10 @@ const RestScreen = () => {
           fontWeight: "500",
           marginTop: 20,
           textAlign: "center",
-          color: "white",
+          color: "black",
         }}
       >
-        Be Ready!
+        Time for rest!
       </Text>
 
       <Text
@@ -50,10 +47,10 @@ const RestScreen = () => {
           fontWeight: "800",
           marginTop: 20,
           textAlign: "center",
-          color: "white",
+          color: "black",
         }}
       >
-        {timeLeft}
+        {timeLeft} s
       </Text>
     </SafeAreaView>
   );

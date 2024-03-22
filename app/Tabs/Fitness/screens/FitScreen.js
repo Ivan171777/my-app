@@ -32,9 +32,10 @@ const FitScreen = () => {
   console.log(completed, "completed excersise");
   return (
     <SafeAreaView 
-    style={{ backgroundColor: "black", height: "100%"}}>
+    style={{ backgroundColor: "white", height: "100%"}}>
       <Image
-        style={{ width: "80%", height: 200, marginTop: 100, marginLeft: 40, borderRadius: 30 }}
+        style={{ width: "80%", height: 200, marginTop: 100, marginLeft: 40, borderRadius: 15, borderColor: "black", borderWidth: 2 }}
+        
         source={{ uri: current.image }}
       />
 
@@ -45,7 +46,7 @@ const FitScreen = () => {
           marginTop: 30,
           fontSize: 30,
           fontWeight: "bold",
-          color: "white",
+          color: "black",
         }}
       >
         {current.name}
@@ -61,7 +62,7 @@ const FitScreen = () => {
           color: "grey",
         }}
       >
-        x{current.sets}
+        x{current.sets} excersises
       </Text>
 
 
@@ -84,7 +85,7 @@ const FitScreen = () => {
             }, 2000);
           }}
           style={{
-            backgroundColor: "white",
+            backgroundColor: "black",
             padding: 10,
             borderRadius: 20,
             marginHorizontal: 20,
@@ -92,7 +93,7 @@ const FitScreen = () => {
           }}
         >
           <Text
-            style={{ color: "black", fontWeight: "bold", textAlign: "center", backgroundColor: "white" }}
+            style={{ color: "white", fontWeight: "bold", textAlign: "center", backgroundColor: "black" }}
           >
             PREV
           </Text>
@@ -103,7 +104,7 @@ const FitScreen = () => {
               navigation.navigate("Home");
             }}
             style={{
-              backgroundColor: "white",
+              backgroundColor: "black",
               padding: 10,
               borderRadius: 20,
               marginHorizontal: 20,
@@ -112,7 +113,7 @@ const FitScreen = () => {
           >
             <Text
               style={{
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 textAlign: "center",
               }}
@@ -130,7 +131,7 @@ const FitScreen = () => {
               }, 2000);
             }}
             style={{
-              backgroundColor: "white",
+              backgroundColor: "black",
               padding: 10,
               borderRadius: 20,
               marginHorizontal: 20,
@@ -139,7 +140,7 @@ const FitScreen = () => {
           >
             <Text
               style={{
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 textAlign: "center",
               }}
@@ -156,7 +157,7 @@ const FitScreen = () => {
             navigation.navigate("Home");
           }}
           style={{
-            backgroundColor: "white",
+            backgroundColor: "black",
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 30,
@@ -170,7 +171,7 @@ const FitScreen = () => {
               textAlign: "center",
               fontWeight: "bold",
               fontSize: 20,
-              color: "black",
+              color: "white",
             }}
           >
             DONE
@@ -182,14 +183,14 @@ const FitScreen = () => {
             navigation.navigate("Rest");
             setCompleted([...completed, current.name]);
             setWorkout(workout + 1);
-            setMinutes(minutes + 2.5);
+            setMinutes(minutes + 2);
             setCalories(calories + 6.3);
             setTimeout(() => {
               setIndex(index + 1);
             }, 2000);
           }}
           style={{
-            backgroundColor: "white",
+            backgroundColor: "black",
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: 30,
@@ -202,9 +203,9 @@ const FitScreen = () => {
             style={{
               textAlign: "center",
               fontWeight: "bold",
-              backgroundColor: "white",
+              backgroundColor: "black",
               fontSize: 20,
-              color: "black",
+              color: "white",
             }}
           >
             DONE

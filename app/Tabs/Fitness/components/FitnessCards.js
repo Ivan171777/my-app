@@ -3,6 +3,7 @@ import React from "react";
 import fitness from "C:/Users/Ivan/build/my-app/app/Tabs/Fitness/data/fitness";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
 
 const FitnessCards = () => {
   const FitnessData = fitness;
@@ -12,17 +13,16 @@ const FitnessCards = () => {
       {FitnessData.map((item, key) => (
         <Pressable
         onPress={() => navigation.navigate("Workout",{
-          image:item.image,
           excersises:item.excersises,
           id:item.id,
         })}
           style={{ alignItems: "center", justifyContent: "center", margin: 10 }}
           key={key}
         >
-          <Image
-            style={{ width: "95%", height: 140, borderRadius: 7 }}
-            source={{ uri: item.image }}
-          />
+
+        <View
+          style={{ width: "95%", height: 140, borderRadius: 10, backgroundColor: "black"}}/>
+
           <Text
             style={{
               position: "absolute",
@@ -62,10 +62,15 @@ const FitnessCards = () => {
           </Text>
 
           <MaterialCommunityIcons
-            style={{ position: "absolute", color: "red", bottom: 15,left:20 }}
+            style={{ position: "absolute", color: "white", bottom: 15, left:20 }}
             name="lightning-bolt"
             size={24}
-            color="red"
+            color="white"
+          />
+          <AntDesign 
+            style={{position: "absolute", color: "white", bottom: 30, right:20}} 
+            name="Trophy" 
+            size={80}  
           />
         </Pressable>
       ))}
