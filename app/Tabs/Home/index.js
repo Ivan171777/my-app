@@ -1,27 +1,25 @@
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { BottomModal } from "react-native-modals";
 import { ModalTitle, ModalContent } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
-import { Entypo, FontAwesome, Ionicons, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
-
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('my-app.db');
 
 const Index = () => {
   const navigation = useNavigation();
-  const [todos, setTodos] = useState([]);
+  const [tasktodos, setTodos] = useState([]);
   const today = moment().format("D MMMM");
   const [isModalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState("All");
   const [todo, setTodo] = useState("");
   const [pendingTodos, setPendingTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
-  const [marked, setMarked] = useState(false);
   const suggestions = [
     {
       id: "0",
@@ -50,23 +48,22 @@ const Index = () => {
   ];
 
   useEffect(() => {
-    // Проверяем существование таблицы todos при запуске приложения
     db.transaction(tx => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, category TEXT, status TEXT)',
+        'CREATE TABLE IF NOT EXISTS tasktodos (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, category TEXT, status TEXT, date TEXT)',
         [],
-        () => console.log('Table "todos" created successfully'),
-        (_, error) => console.log('Error creating table "todos":', error)
+        () => console.log('Table "tasktodos" created successfully'),
+        (_, error) => console.log('Error creating table "tasktodos":', error)
       );
     });
 
-    getUserTodos(); // Получаем задачи пользователя при запуске приложения
+    getUserTodos();
   }, []);
 
   const getUserTodos = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM todos',
+        'SELECT * FROM tasktodos',
         [],
         (_, { rows: { _array } }) => {
           setTodos(_array);
@@ -84,8 +81,8 @@ const Index = () => {
   const addTodo = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO todos (title, category) VALUES (?, ?)',
-        [todo, category],
+        'INSERT INTO tasktodos (title, category, date) VALUES (?, ?, ?)',
+        [todo, category, moment().format("D MMMM")],
         () => {
           setTodo("");
           setModalVisible(false);
@@ -99,10 +96,9 @@ const Index = () => {
   const markTodoAsCompleted = (todoId) => {
     db.transaction(tx => {
       tx.executeSql(
-        'UPDATE todos SET status = "completed" WHERE id = ?',
+        'UPDATE tasktodos SET status = "completed" WHERE id = ?',
         [todoId],
         () => {
-          setMarked(true);
           getUserTodos();
         },
         (_, error) => console.log(error)
@@ -113,7 +109,7 @@ const Index = () => {
   const deleteTodo = (todoId) => {
     db.transaction(tx => {
       tx.executeSql(
-        'DELETE FROM todos WHERE id = ?',
+        'DELETE FROM tasktodos WHERE id = ?',
         [todoId],
         () => {
           getUserTodos();
@@ -150,7 +146,7 @@ const Index = () => {
 
       <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ padding: 10 }}>
-          {todos?.length > 0 ? (
+          {tasktodos?.length > 0 ? (
             <View>
               {pendingTodos?.length > 0 && <Text>Date: {today}</Text>}
 
