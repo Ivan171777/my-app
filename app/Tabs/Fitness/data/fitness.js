@@ -184,4 +184,72 @@ export default [
       }
     ]
   },
+  {
+    id: "4",
+    image:
+      "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_4.jpg",
+    name: "Health & Grow",
+    description: "Meditation",
+    description2: "Breathing and Stretching",
+    excersises: [
+      {
+        id:"120",
+        image:"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnFtZTNsMWJvY2VtdGFweXloMTYxMzVhZ2IyeXFqdzAzNzI5Nmx3bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1xVc4s9oZrDhO9BOYt/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"121",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2JsdTZuZmVucXlteDlhcXNheW5yYzB4NHo5MGg4cDNzc2J1djBweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MOZdga6ZLDoIHenUxQ/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"122",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG9ncXUwbjJhZG1qMmNtY2E5cGtrZWw5MzVlN2hreHg1cmc1ejJtYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/krP2NRkLqnKEg/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"123",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDF0cTB4NGd1b3VsdWw4Nzk3cGh2aHc5NW5waWR6emVrZGw1azM1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cgfK6GyhXHpnSqdxc7/giphy.gif",
+        name:"Meditation",
+        sets:10,
+      },
+    ]
+  },
+  {
+    id: "5",
+    image:
+      "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_4.jpg",
+    name: "Health & Grow",
+    description: "Meditation",
+    description2: "Affirmations and Visualization",
+    excersises: [
+      {
+        id:"120",
+        image:"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnFtZTNsMWJvY2VtdGFweXloMTYxMzVhZ2IyeXFqdzAzNzI5Nmx3bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1xVc4s9oZrDhO9BOYt/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"121",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2JsdTZuZmVucXlteDlhcXNheW5yYzB4NHo5MGg4cDNzc2J1djBweCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MOZdga6ZLDoIHenUxQ/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"122",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG9ncXUwbjJhZG1qMmNtY2E5cGtrZWw5MzVlN2hreHg1cmc1ejJtYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/krP2NRkLqnKEg/giphy.gif",
+        name:"Breathing",
+        sets:10,
+      },
+      {
+        id:"123",
+        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDF0cTB4NGd1b3VsdWw4Nzk3cGh2aHc5NW5waWR6emVrZGw1azM1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cgfK6GyhXHpnSqdxc7/giphy.gif",
+        name:"Meditation",
+        sets:10,
+      },
+    ]
+  },
 ];

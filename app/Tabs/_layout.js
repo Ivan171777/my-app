@@ -26,7 +26,7 @@ export default function Layout() {
         <Tabs.Screen
           name="Fitness"
           options={{
-            tabBarLabel: "Fitness",
+            tabBarLabel: "Activities",
             tabBarLabelStyle: { color: "grey" },
             headerShown:false,
             tabBarIcon:({focused}) => 

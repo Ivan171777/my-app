@@ -1,5 +1,5 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
+import { StyleSheet, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { BottomModal } from "react-native-modals";
 import { ModalTitle, ModalContent } from "react-native-modals";
@@ -46,6 +46,14 @@ const Index = () => {
       todo: "Finish assignments",
     },
   ];
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getUserTodos();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     db.transaction(tx => {

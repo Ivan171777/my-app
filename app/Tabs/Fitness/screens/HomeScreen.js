@@ -50,7 +50,7 @@ const HomeScreen = () => {
         height: "7%",
       }}>
       <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-        Fitness
+        Activities
       </Text>
     </View>
 

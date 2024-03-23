@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
-//import MenuScreen from '../screens/MenuScreen';
+import PlannerScreen from '../screens/PlannerScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,8 +10,8 @@ const StackNavigatorPlanner = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={{headerShown: false}}
-        name="Home"
-        component={HomeScreen}/>
+        name="Planner"
+        component={PlannerScreen}/>
     </Stack.Navigator>
   );
 };

@@ -3,10 +3,11 @@ import moment from 'moment';
 import { View, Text, ScrollView } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { Entypo, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { useFocusEffect } from '@react-navigation/native';
 
 const db = SQLite.openDatabase('my-app.db');
 
-const HomeScreen = () => {
+const PlannerScreen = () => {
   const currentDate = moment();
   const startOfWeek = currentDate.clone().startOf('week');
   const [menuData, setMenuData] = useState([]);
@@ -14,6 +15,13 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchMenuData();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Вызываем fetchMenuData при фокусе на экране
+      fetchMenuData();
+    }, [])
+  );
 
   const fetchMenuData = () => {
     db.transaction(tx => {
@@ -35,7 +43,6 @@ const HomeScreen = () => {
       const date = startOfWeek.clone().add(i, 'days');
       const formattedDate = date.format('D MMMM');
       const tasksForDate = menuData.filter(menu => moment(menu.createdAt).format('D MMMM') === formattedDate); // Фильтруем задачи для текущей даты
-      console.log("Formatted Date:", formattedDate, "Tasks For Date:", tasksForDate);
       const isCurrentDate = date.isSame(currentDate, 'day');
   
       weekDates.push(
@@ -86,7 +93,11 @@ const HomeScreen = () => {
               },
             ]}
           >
-            <View style ={{marginLeft: 310}}>
+            <Text style={{
+            fontSize: 12,
+            fontWeight: '600',marginBottom: 5}} >Tasks</Text>
+            
+            <View style ={{marginLeft: 310, marginTop: -15}}>
             <Ionicons name="checkmark-done" size={10} color="black"/>
           </View >
             {tasksForDate.length > 0 ? (
@@ -112,10 +123,11 @@ const HomeScreen = () => {
                 </Text>
               ))
             ) : (
+              
               <Text
                 style={{
                   textAlign: "left",
-                  marginTop: 0,
+                  marginTop: 5,
                   marginLeft: 10,
                   fontSize: 12,
                   fontWeight: '600',
@@ -123,7 +135,9 @@ const HomeScreen = () => {
                 }}
               >
                 No Tasks
+                
               </Text>
+              
             )}
           </View>
         </View>
@@ -138,7 +152,7 @@ const HomeScreen = () => {
     for (let i = 0; i < numWeeks; i++) {
       weeks.push(
         <View key={i}>
-          <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 10 }}>
+          <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 10, marginTop: 10 }}>
             {startOfWeek.clone().add(i * 7, 'days').format('DD MMM')}
           </Text>
           <View>{renderWeekDates(startOfWeek.clone().add(i * 7, 'days'))}</View>
@@ -180,4 +194,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default PlannerScreen;

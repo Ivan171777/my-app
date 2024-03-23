@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BarChart } from "react-native-chart-kit";
 import { MaterialIcons } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
+import { useNavigation } from '@react-navigation/native';
 
 
 const db = SQLite.openDatabase('my-app.db');
@@ -10,8 +11,15 @@ const db = SQLite.openDatabase('my-app.db');
 const Index = () => {
   const [completedTasks, setCompletedTasks] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
-  
-  
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchTaskData();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     fetchTaskData();
