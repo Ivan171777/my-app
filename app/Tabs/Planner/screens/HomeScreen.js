@@ -80,15 +80,15 @@ const HomeScreen = () => {
                 borderRadius: 8,
                 padding: 10,
                 width: '85%',
-                height: 120,
+                height: "auto",
                 marginTop: -50,
-                marginLeft: 50
+                marginLeft: 55
               },
             ]}
           >
-            <View>
-          <FontAwesome name="circle" size={10} color="gray" />
-          </View>
+            <View style ={{marginLeft: 310}}>
+            <Ionicons name="checkmark-done" size={10} color="black"/>
+          </View >
             {tasksForDate.length > 0 ? (
               tasksForDate.map((task, index) => (
                 <Text
@@ -96,21 +96,27 @@ const HomeScreen = () => {
                   style={{
                     textAlign: "left",
                     marginTop: 2,
-                    marginLeft: 120,
                     marginBottom: 2,
+                    marginLeft: 10,
                     fontSize: 12,
                     fontWeight: '600',
                     textDecorationLine: task.status === 'completed' ? 'line-through' : '',
+                    
                   }}
                 >
-                  <Ionicons name="checkmark-done" size={10} color="black"/>
-                  {task.title}
+                  <View>
+                    <FontAwesome style={{marginRight: 5}} name="circle" size={10} color="gray" />
+                  </View>
+                  
+                    {task.title}
                 </Text>
               ))
             ) : (
               <Text
                 style={{
-                  textAlign: 'center',
+                  textAlign: "left",
+                  marginTop: 0,
+                  marginLeft: 10,
                   fontSize: 12,
                   fontWeight: '600',
                   color: 'gray',

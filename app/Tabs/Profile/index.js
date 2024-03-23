@@ -20,7 +20,7 @@ const Index = () => {
   const fetchTaskData = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT COUNT(*) AS totalCompletedTodos FROM todos WHERE status = ?',
+        'SELECT COUNT(*) AS totalCompletedTodos FROM tasktodos WHERE status = ?',
         ['completed'],
         (_, { rows: { _array } }) => {
           setCompletedTasks(_array[0]?.totalCompletedTodos || 0);
@@ -29,7 +29,7 @@ const Index = () => {
       );
       
       tx.executeSql(
-        'SELECT COUNT(*) AS totalTodos FROM todos',
+        'SELECT COUNT(*) AS totalTodos FROM tasktodos',
         [],
         (_, { rows: { _array } }) => {
           setTotalTasks(_array[0]?.totalTodos || 0);
