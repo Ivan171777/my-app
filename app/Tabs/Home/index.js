@@ -48,6 +48,7 @@ const Index = () => {
   ];
 
   useEffect(() => {
+      console.log("Уведомления успешно подключены"); 
     const unsubscribe = navigation.addListener('focus', () => {
       getUserTodos();
     });

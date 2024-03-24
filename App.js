@@ -1,7 +1,19 @@
+import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
+import registerNNPushToken from 'native-notify';
 
 export default function App() {
+  useEffect(() => {
+    registerNNPushToken(20366, 'MoDTvdCGtbtTkqo5T37xTg', (success) => {
+      if (success) {
+        console.log("Уведомления успешно подключены");
+      } else {
+        console.error("Не удалось подключить уведомления");
+      }
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
@@ -17,5 +29,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  
 });
