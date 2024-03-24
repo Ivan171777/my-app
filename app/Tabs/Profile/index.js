@@ -4,18 +4,22 @@ import { BarChart } from "react-native-chart-kit";
 import { MaterialIcons } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import { useNavigation } from '@react-navigation/native';
+import { Pressable } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
-
-const db = SQLite.openDatabase('my-app.db');
+const db = SQLite.openDatabase('my-app.db'); // Ваша база данных
+const userDB = SQLite.openDatabase('myapp.db'); // База данных с пользователями
 
 const Index = () => {
   const [completedTasks, setCompletedTasks] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
+  const [userData, setUserData] = useState({ name: "", email: "" });
   const navigation = useNavigation();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       fetchTaskData();
+      fetchUserData();
     });
 
     return unsubscribe;
@@ -23,6 +27,7 @@ const Index = () => {
 
   useEffect(() => {
     fetchTaskData();
+    fetchUserData();
   }, []);
 
   const fetchTaskData = () => {
@@ -47,6 +52,22 @@ const Index = () => {
     });
   };
 
+  const fetchUserData = () => {
+    userDB.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM users LIMIT 1',
+        [],
+        (_, { rows: { _array } }) => {
+          if (_array.length > 0) {
+            const { name, email } = _array[0];
+            setUserData({ name, email });
+          }
+        },
+        (_, error) => console.log('Error fetching user data:', error)
+      );
+    });
+  };
+
   return (
     <>
       <View
@@ -67,97 +88,110 @@ const Index = () => {
           <MaterialIcons name="account-circle" size={60} color="black" />
           <View>
             <Text style={{ fontSize: 16, fontWeight: "600" }}>
-              Name Lastname
+            {userData.name}
             </Text>
             <Text style={{ fontSize: 15, color: "gray", marginTop: 4 }}>
-              Profile
+            {userData.email}
             </Text>
           </View>
         </View>
-        <View style={{ marginVertical: 12 }}>
-          <Text>Tasks Overview</Text>
+        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25}}>
+          <Pressable onPress={() => navigation.navigate('person')}>
+                <MaterialIcons style={{marginLeft: 10}} name="switch-account" size={24} color="white" />
+                <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
+                  Personal Goals
+                </Text>
+              </Pressable>
+        </View>
+
+        <View style={{ marginTop: 15, backgroundColor: "white", padding: 8, width: 410, borderRadius: 25, borderWidth: 1}}>
+          <Entypo style={{marginLeft: 10}} name="circular-graph" size={24} color="black" />
+          <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
+            Tasks Overview
+          </Text>
+        </View>
+                
+        <View style={{ marginVertical: 12}}>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
               gap: 6,
               marginVertical: 8,
+              
             }}
           >
             <View
               style={{
-                backgroundColor: "#D3D3D3",
-                padding: 10,
-                borderRadius: 8,
+                backgroundColor: "black",
+                padding: 12,
+                borderRadius: 25,
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <Text
-                style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}
+                style={{color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                {completedTasks}
+                Completed Tasks: {completedTasks} 
               </Text>
-              <Text style={{ marginTop: 4 }}>Completed Tasks</Text>
             </View>
+            
+                
+              
 
             <View
               style={{
-                backgroundColor: "#D3D3D3",
-                padding: 10,
-                borderRadius: 8,
+                backgroundColor: "black",
+                padding: 12,
+                borderRadius: 25,
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <Text
-                style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}
+                style={{color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                {totalTasks}
+                Total Tasks: {totalTasks} 
               </Text>
-              <Text style={{ marginTop: 4 }}>Total Tasks</Text>
             </View>
           </View>
         </View>
-        <View
-          style={{
-            backgroundColor: "black",
-            padding: 10,
-            borderRadius: 16,
-            marginTop: 15,
-          }}
-        >
-          <Text style={{ textAlign: "center", color: "white" }}>
-            Tasks for the past 7 days
-          </Text>
+
+        <View style={{ marginTop: 0, backgroundColor: "white", padding: 8, width: 410, borderRadius: 25, borderWidth: 1}}>
+          
+                <Entypo style={{marginLeft: 10}} name="bar-graph" size={24} color="black" />
+                <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
+                  Statistics summary
+                </Text>
+
         </View>
         
         <View
           style={{
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 20,
+            marginTop: 25,
           }}
         >
         </View>
+        <View style={{backgroundColor: "black", padding: 20, borderRadius: 25}}>
         <BarChart
           data={{
-            labels: ["0","Total Tasks", "Completed Tasks"],
+            labels: ["0 Tasks","Total Tasks", "Completed Tasks"],
             datasets: [
               {
                 data: [0, totalTasks, completedTasks],
               },
             ],
           }}
-          width={Dimensions.get("window").width - 20} // from react-native
+          width={Dimensions.get("window").width - 40} // from react-native
           height={220}
-          yAxisInterval={2} // optional, defaults to 1
+          yAxisInterval={2} // optional
           chartConfig={{
-            backgroundColor: "#D3D3D3",
-            backgroundGradientFrom: "#D3D3D3",
-            backgroundGradientTo: "grey",
+            backgroundColor: "white",
+            backgroundGradientFrom: "#000000",
+            backgroundGradientTo: "#000000",
             decimalPlaces: 0, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -175,6 +209,7 @@ const Index = () => {
             borderRadius: 16
           }}
         />   
+        </View>
       </View>
     </>
   );
