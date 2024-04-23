@@ -48,7 +48,7 @@ const login = () => {
     <View style={{ backgroundColor: "white"}}>
         <View style={{ marginTop: 40 , backgroundColor: "white", alignItems: "center"}}>
           <Text style={{ fontSize: 30, fontWeight: "600", color: "black" }}>
-            Welcome to the Grind App!
+          Добро пожаловать в приложение Grind!
           </Text>
           <Entypo style={{ marginTop: 40 }} name="sports-club" size={200} color="black" />
         </View>
@@ -61,7 +61,7 @@ const login = () => {
         <KeyboardAvoidingView>
           <View style={{ alignItems: "center" }}>
             <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 70}}>
-              Login to your account
+            Войдите в свой аккаунт
             </Text>
           </View>
 
@@ -91,7 +91,7 @@ const login = () => {
                   width: 300,
                   fontSize: email ? 17 : 17,
                 }}
-                placeholder="Enter your email" />
+                placeholder="Введите почту" />
             </View>
 
             <View
@@ -120,7 +120,7 @@ const login = () => {
                   width: 300,
                   fontSize: email ? 17 : 17,
                 }}
-                placeholder="Enter your password" />
+                placeholder="Введите пароль" />
             </View>
 
             <View
@@ -133,7 +133,7 @@ const login = () => {
             >
               <Text></Text>
               <Text style={{ color: "grey", fontWeight: "500" }}>
-                Forgot Password?
+                Забыли пароль?
               </Text>
             </View>
 
@@ -158,7 +158,7 @@ const login = () => {
                   fontSize: 16,
                 }}
               >
-                Login
+                Логин
               </Text>
             </Pressable>
 
@@ -167,7 +167,7 @@ const login = () => {
               style={{ marginTop: 15,}}
             >
               <Text style={{ textAlign: "center", fontSize: 15, color: "gray" }}>
-                Don't have an account? Sign up
+                У вас нет аккаунта? Зарегистрироваться
               </Text>
             </Pressable>
           </View>

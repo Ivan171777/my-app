@@ -20,7 +20,7 @@ const HomeScreen = () => {
 
   // Пример данных для графика
   const data = {
-    labels: ["Workouts", "Minutes"],
+    labels: ["Упражнения", "Минуты"],
     datasets: [
       {
         data: [workout, minutes],
@@ -29,7 +29,7 @@ const HomeScreen = () => {
     ],
   };
   const data2 = {
-    labels: ["Calories", "Minutes"],
+    labels: ["Калории", "Минуты"],
     datasets: [
       {
         data: [calories, minutes],
@@ -50,7 +50,7 @@ const HomeScreen = () => {
         height: "7%",
       }}>
       <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-        Activities
+        Активности
       </Text>
     </View>
 
@@ -61,7 +61,7 @@ const HomeScreen = () => {
           marginTop: 10,
         }}>
           <Text style={{ marginHorizontal: 30, color: "black", fontWeight: "regular", fontSize: 14 }}>
-          Exercise statistics summary
+          Сводная статистика упражнений
         </Text>
         <Entypo style={{ marginHorizontal: 10, color: "black", marginTop: -15}}
         name="bar-graph" size={14} color="black" />
@@ -128,7 +128,7 @@ const HomeScreen = () => {
               alignItems: "center"  ,
               margin: 10,}}>         
               <MaterialCommunityIcons name="archive-star-outline" size={50} color="black" />
-              <Text>Sets</Text>
+              <Text>Сеты тренировок</Text>
         </View>
           <FitnessCards />
         </View>

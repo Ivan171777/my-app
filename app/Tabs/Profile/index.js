@@ -80,7 +80,7 @@ const Index = () => {
         }}
       >
         <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-          Profile
+          Профиль
         </Text>
       </View>
       <View style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
@@ -99,7 +99,7 @@ const Index = () => {
           <Pressable onPress={() => navigation.navigate('person')}>
                 <MaterialIcons style={{marginLeft: 10}} name="switch-account" size={24} color="white" />
                 <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
-                  Personal Goals
+                  Персональные цели
                 </Text>
               </Pressable>
         </View>
@@ -107,7 +107,7 @@ const Index = () => {
         <View style={{ marginTop: 15, backgroundColor: "white", padding: 8, width: 410, borderRadius: 25, borderWidth: 1}}>
           <Entypo style={{marginLeft: 10}} name="circular-graph" size={24} color="black" />
           <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
-            Tasks Overview
+            Сводка по задачам
           </Text>
         </View>
                 
@@ -133,7 +133,7 @@ const Index = () => {
               <Text
                 style={{color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                Completed Tasks: {completedTasks} 
+                Выполненные: {completedTasks} 
               </Text>
             </View>
             
@@ -152,7 +152,7 @@ const Index = () => {
               <Text
                 style={{color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                Total Tasks: {totalTasks} 
+                Всего задач: {totalTasks} 
               </Text>
             </View>
           </View>
@@ -162,7 +162,7 @@ const Index = () => {
           
                 <Entypo style={{marginLeft: 10}} name="bar-graph" size={24} color="black" />
                 <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
-                  Statistics summary
+                Сводная статистика
                 </Text>
 
         </View>
@@ -178,7 +178,7 @@ const Index = () => {
         <View style={{backgroundColor: "black", padding: 20, borderRadius: 25}}>
         <BarChart
           data={{
-            labels: ["0 Tasks","Total Tasks", "Completed Tasks"],
+            labels: ["0 Задач","Всего задач", "Выполненные"],
             datasets: [
               {
                 data: [0, totalTasks, completedTasks],

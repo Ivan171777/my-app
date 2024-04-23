@@ -62,7 +62,7 @@ const FitScreen = () => {
           color: "grey",
         }}
       >
-        x{current.sets} excersises
+        x{current.sets} раз
       </Text>
 
 
@@ -89,13 +89,13 @@ const FitScreen = () => {
             padding: 10,
             borderRadius: 20,
             marginHorizontal: 20,
-            width: 70,
+            width: 150,
           }}
         >
           <Text
             style={{ color: "white", fontWeight: "bold", textAlign: "center", backgroundColor: "black" }}
           >
-            PREV
+            ПРЕДЫДУЩЕЕ
           </Text>
         </Pressable>
         {index + 1 >= excersise.length ? (
@@ -108,7 +108,7 @@ const FitScreen = () => {
               padding: 10,
               borderRadius: 20,
               marginHorizontal: 20,
-              width: 70,
+              width: 150,
             }}
           >
             <Text
@@ -118,7 +118,7 @@ const FitScreen = () => {
                 textAlign: "center",
               }}
             >
-              SKIP
+              ПРОПУСТИТЬ
             </Text>
           </Pressable>
         ) : (
@@ -135,7 +135,7 @@ const FitScreen = () => {
               padding: 10,
               borderRadius: 20,
               marginHorizontal: 20,
-              width: 70,
+              width: 150,
             }}
           >
             <Text
@@ -145,7 +145,7 @@ const FitScreen = () => {
                 textAlign: "center",
               }}
             >
-              SKIP
+              ПРОПУСТИТЬ
             </Text>
           </Pressable>
         )}
@@ -163,7 +163,7 @@ const FitScreen = () => {
             marginTop: 30,
             borderRadius: 20,
             padding: 10,
-            width: 150,
+            width: 170,
           }}
         >
           <Text
@@ -174,7 +174,7 @@ const FitScreen = () => {
               color: "white",
             }}
           >
-            DONE
+            ГОТОВО
           </Text>
         </Pressable>
       ) : (
@@ -196,7 +196,7 @@ const FitScreen = () => {
             marginTop: 30,
             borderRadius: 20,
             padding: 10,
-            width: 90,
+            width: 170,
           }}
         >
           <Text
@@ -208,7 +208,7 @@ const FitScreen = () => {
               color: "white",
             }}
           >
-            DONE
+            ГОТОВО
           </Text>
         </Pressable>
       )}

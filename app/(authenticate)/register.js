@@ -59,7 +59,7 @@ const register = () => {
     <><View style={{ backgroundColor: "white" }}>
       <View style={{ marginTop: 40, backgroundColor: "white", alignItems: "center" }}>
         <Text style={{ fontSize: 30, fontWeight: "600", color: "black" }}>
-          Welcome to the Grind App!
+        Добро пожаловать в приложение Grind!
         </Text>
         <Entypo style={{ marginTop: 40 }} name="sports-club" size={200} color="black" />
       </View>
@@ -68,7 +68,7 @@ const register = () => {
         <KeyboardAvoidingView>
           <View style={{ alignItems: "center" }}>
             <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 70 }}>
-            Register your account
+            Зарегистрироваться
             </Text>
           </View>
 
@@ -98,7 +98,7 @@ const register = () => {
                   width: 300,
                   fontSize: 17,
                 }}
-              placeholder="Enter your name" />
+              placeholder="Введите имя" />
             </View>
 
             <View
@@ -126,7 +126,7 @@ const register = () => {
                   width: 300,
                   fontSize: 17,
                 }}
-              placeholder="Enter your email" />
+              placeholder="Введите почту" />
             </View>
             <View
               style={{
@@ -154,7 +154,7 @@ const register = () => {
                   fontSize: email ? 17 : 17,
                 }}
               secureTextEntry={true}
-              placeholder="Enter your password" />
+              placeholder="Введите пароль" />
             </View>
 
             <View style={{ marginTop: 30 }} />
@@ -178,13 +178,13 @@ const register = () => {
                   fontSize: 16,
                 }}
               >
-                Register
+                Зарегистрироваться
               </Text>
             </Pressable>
 
             <Pressable onPress={() => router.replace("/login")} style={{ marginTop: 15 }}>
               <Text style={{ textAlign: "center", fontSize: 15, color: "gray" }}>
-                Already have an account? Log in
+                Уже есть аккаунт? Войти в аккаунт
               </Text>
             </Pressable>
           </View>

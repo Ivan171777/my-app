@@ -42,10 +42,10 @@ const EditPersonal = () => {
         userData,
         (tx, results) => {
           if (results.rowsAffected > 0) {
-            Alert.alert("Data saved", "Your data has been saved successfully");
+            Alert.alert("Данные сохранены", "Данные были успешно сохранены");
             navigation.goBack(); // Возвращаемся на предыдущий экран после сохранения
           } else {
-            Alert.alert("Data save failed", "An error occurred while saving your data");
+            Alert.alert("Данные не сохранены", "Возникла ошибка при сохранении данных");
           }
         },
         error => {
@@ -69,11 +69,11 @@ return (
 
 
         <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-            Personal Goals
+        Персональные цели
         </Text>
 
         <Pressable onPress={saveData}>
-            <AntDesign style={{ marginLeft: 45 }} name="edit" size={30} color="black" />
+            <AntDesign style={{ marginLeft: -30 }} name="edit" size={30} color="black" />
         </Pressable>
     </View>
     
@@ -83,41 +83,41 @@ return (
             <MaterialCommunityIcons name="weight-kilogram" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Weight"
+                placeholder="Вес"
                 value={weight}
                 onChangeText={text => setWeight(text)}
                 keyboardType="numeric" />
             <MaterialCommunityIcons name="human-male-height" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Height"
+                placeholder="Рост"
                 value={height}
                 onChangeText={text => setHeight(text)}
                 keyboardType="numeric" />
             <MaterialIcons name="food-bank" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Goal (Cut/Bulk)"
+                placeholder="Цель диеты (Похудение/Набор/Сохранение)"
                 value={goal}
                 onChangeText={text => setGoal(text)} />
             <MaterialIcons name="emoji-emotions" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Emotional State (1-10)"
+                placeholder="Эмоциональное состояние (1-10)"
                 value={emotionalState}
                 onChangeText={text => setEmotionalState(text)}
                 keyboardType="numeric" />
             <FontAwesome6 name="brain" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Mental State (1-10)"
+                placeholder="Ментальное состояние (1-10)"
                 value={mentalState}
                 onChangeText={text => setMentalState(text)}
                 keyboardType="numeric" />
             <FontAwesome5 name="running" size={24} color="black" />
             <TextInput
                 style={styles.input}
-                placeholder="Physical Activity (1-10)"
+                placeholder="Физическая активность (1-10)"
                 value={physicalActivity}
                 onChangeText={text => setPhysicalActivity(text)}
                 keyboardType="numeric" />

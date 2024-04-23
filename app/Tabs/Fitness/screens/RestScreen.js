@@ -38,7 +38,7 @@ const RestScreen = () => {
           color: "black",
         }}
       >
-        Time for rest!
+        Время для отдыха!
       </Text>
 
       <Text
@@ -50,7 +50,7 @@ const RestScreen = () => {
           color: "black",
         }}
       >
-        {timeLeft} s
+        {timeLeft} с
       </Text>
     </SafeAreaView>
   );

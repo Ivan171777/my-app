@@ -95,7 +95,7 @@ const PlannerScreen = () => {
           >
             <Text style={{
             fontSize: 12,
-            fontWeight: '600',marginBottom: 5}} >Tasks</Text>
+            fontWeight: '600',marginBottom: 5}} >Задачи</Text>
             
             <View style ={{marginLeft: 310, marginTop: -15}}>
             <Ionicons name="checkmark-done" size={10} color="black"/>
@@ -134,7 +134,7 @@ const PlannerScreen = () => {
                   color: 'gray',
                 }}
               >
-                No Tasks
+                Нет задач
                 
               </Text>
               
@@ -182,7 +182,7 @@ const PlannerScreen = () => {
             fontSize: 26,
           }}
         >
-          Planner
+          Планнер
         </Text>
       </View>
       <ScrollView style={{ marginTop: 0 }}>

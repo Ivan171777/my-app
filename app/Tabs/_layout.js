@@ -11,7 +11,7 @@ export default function Layout() {
         <Tabs.Screen
           name="Home"
           options={{
-            tabBarLabel: "Tasks",
+            tabBarLabel: "Задачи",
             tabBarLabelStyle: { color: "grey" },
             headerShown:false,
             tabBarIcon:({focused}) => 
@@ -26,7 +26,7 @@ export default function Layout() {
         <Tabs.Screen
           name="Fitness"
           options={{
-            tabBarLabel: "Activities",
+            tabBarLabel: "Активности",
             tabBarLabelStyle: { color: "grey" },
             headerShown:false,
             tabBarIcon:({focused}) => 
@@ -45,7 +45,7 @@ export default function Layout() {
         <Tabs.Screen
           name="Planner"
           options={{
-            tabBarLabel: "Planner",
+            tabBarLabel: "Планнер",
             tabBarLabelStyle: { color: "grey" },
             headerShown:false,
             tabBarIcon:({focused}) => 
@@ -62,7 +62,7 @@ export default function Layout() {
         <Tabs.Screen
           name="Profile"
           options={{
-            tabBarLabel: "Profile",
+            tabBarLabel: "Профиль",
             tabBarLabelStyle: { color: "grey" },
             headerShown:false,
             tabBarIcon:({focused}) => 

@@ -66,11 +66,11 @@ const Person = () => {
     
     
     <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-      Personal Goals
+      Персональные цели
     </Text>
     
     <Pressable onPress={() => navigation.navigate('editpersonal')}>
-      <AntDesign style={{marginLeft: 45}} name="edit" size={30} color="black" />
+      <AntDesign style={{marginLeft: -30}} name="edit" size={30} color="black" />
     </Pressable>
     </View>
 
@@ -82,27 +82,27 @@ const Person = () => {
     <View style={styles.userDataContent}>
       <View style={styles.userDataItem}>
       <MaterialCommunityIcons name="weight-kilogram" size={24} color="black" />
-        <Text> Weight: {userData.weight}</Text>
+        <Text> Вес: {userData.weight}</Text>
       </View>
       <View style={styles.userDataItem}>
       <MaterialCommunityIcons name="human-male-height" size={24} color="black" />
-        <Text> Height: {userData.height}</Text>
+        <Text> Рост: {userData.height}</Text>
       </View>
       <View style={styles.userDataItem}>
       <MaterialIcons name="food-bank" size={24} color="black" />
-        <Text> Goal: {userData.goal}</Text>
+        <Text> Цель диеты: {userData.goal}</Text>
       </View>
       <View style={styles.userDataItem}>
       <MaterialIcons name="emoji-emotions" size={24} color="black" />
-        <Text> Emotional State: {userData.emotionalState}</Text>
+        <Text> Эмоциональное состояние: {userData.emotionalState}</Text>
       </View>
       <View style={styles.userDataItem}>
       <FontAwesome6 name="brain" size={24} color="black" />
-        <Text> Mental State: {userData.mentalState}</Text>
+        <Text> Ментальное состояние: {userData.mentalState}</Text>
       </View>
       <View style={styles.userDataItem}>
       <FontAwesome5 name="running" size={24} color="black" />
-        <Text> Physical Activity: {userData.physicalActivity}</Text>
+        <Text> Физическая активность: {userData.physicalActivity}</Text>
       </View>
     </View>
   )}

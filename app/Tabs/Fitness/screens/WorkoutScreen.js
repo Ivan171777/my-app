@@ -70,7 +70,7 @@ const WorkOutScreen = () => {
             fontWeight: "600",
           }}
         >
-          START
+          Начало
         </Text>
       </Pressable>
 
@@ -85,7 +85,7 @@ const WorkOutScreen = () => {
             />
 
             <View style={{ marginLeft: 10, marginTop: -5 }}>
-              <Text style={{ fontSize: 17, fontWeight: "bold", width:200, color: "black"}}>
+              <Text style={{ fontSize: 17, fontWeight: "bold", width:250, color: "black"}}>
                 {item.name}
               </Text>
 

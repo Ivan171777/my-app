@@ -8,13 +8,14 @@ import { Entypo, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons
 import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
+import 'moment/locale/ru';
 
 const db = SQLite.openDatabase('my-app.db');
 
 const Index = () => {
   const navigation = useNavigation();
   const [tasktodos, setTodos] = useState([]);
-  const today = moment().format("D MMMM");
+  const today = moment().locale('ru').format("D MMMM");
   const [isModalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState("All");
   const [todo, setTodo] = useState("");
@@ -23,27 +24,27 @@ const Index = () => {
   const suggestions = [
     {
       id: "0",
-      todo: "Drink water",
+      todo: "Пить воду",
     },
     {
       id: "1",
-      todo: "Training",
+      todo: "Тренироваться",
     },
     {
       id: "2",
-      todo: "Wake up at 8:00",
+      todo: "Встать в 8:00",
     },
     {
       id: "3",
-      todo: "Vitamins",
+      todo: "Принять витамины",
     },
     {
       id: "4",
-      todo: "Reading",
+      todo: "Читать",
     },
     {
       id: "5",
-      todo: "Finish assignments",
+      todo: "Завершить задачи",
     },
   ];
 
@@ -143,12 +144,12 @@ const Index = () => {
         
         
         <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-          Tasks
+          Задачи
         </Text>
         
         
         <Pressable 
-        style={{marginTop: 5, marginHorizontal: 160}} onPress={() => setModalVisible(!isModalVisible)}>
+        style={{marginTop: 5, marginHorizontal: 140}} onPress={() => setModalVisible(!isModalVisible)}>
           <AntDesign name="pluscircle" size={35} color="black" />
         </Pressable>
       </View>
@@ -157,7 +158,7 @@ const Index = () => {
         <View style={{ padding: 10 }}>
           {tasktodos?.length > 0 ? (
             <View>
-              {pendingTodos?.length > 0 && <Text>Date: {today}</Text>}
+              {pendingTodos?.length > 0 && <Text>Дата: {today}</Text>}
 
               {pendingTodos?.map((item, index) => (
                 <Pressable
@@ -212,7 +213,7 @@ const Index = () => {
                       marginVertical: 10,
                     }}
                   >
-                    <Text>Completed Tasks</Text>
+                    <Text>Выполненные задачи</Text>
                     <MaterialIcons
                       name="arrow-drop-down"
                       size={15}
@@ -272,7 +273,7 @@ const Index = () => {
                   textAlign: "center",
                 }}
               >
-                No Tasks... Add a new task! 
+                Нет задач... Добавьте новую задачу! 
               </Text>
               <Pressable
                 onPress={() => setModalVisible(!isModalVisible)}
@@ -290,7 +291,7 @@ const Index = () => {
         onHardwareBackPress={() => setModalVisible(!isModalVisible)}
         swipeDirection={["up", "down"]}
         swipeThreshold={200}
-        modalTitle={<ModalTitle title="Add a new task" style={{ backgroundColor: "white" }}/>}
+        modalTitle={<ModalTitle title="Новая задача" style={{ backgroundColor: "white" }}/>}
         modalAnimation={
           new SlideAnimation({
             slideFrom: "bottom",
@@ -311,7 +312,7 @@ const Index = () => {
             <TextInput
               value={todo}
               onChangeText={(text) => setTodo(text)}
-              placeholder="Input a new task here"
+              placeholder="Введите новую задачу"
               style={{
                 padding: 10,
                 borderColor: "black",
@@ -322,7 +323,7 @@ const Index = () => {
             />
             <Ionicons onPress={addTodo} name="send" size={24} color="black" />
           </View>
-          <Text>Some sugggestions</Text>
+          <Text>Предложенные задачи</Text>
           <View
             style={{
               flexDirection: "row",
