@@ -3,44 +3,39 @@ export default [
     id: "0",
     image: "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_1.jpg",
     name: "Сет 1",
-    description: "7x4 Упражнений",
+    description: "3x5 Упражнений",
     description2: "Все тело",
     excersises: [
       {
         id: "10",
         image:
-          "https://sworkit.com/wp-content/uploads/2020/06/sworkit-jumping-jack.gif",
+          "https://www.fitnesschemas.nl/images/Single_Squat_Jump.gif",
         name: "Прыжки",
         sets:12,
       },
       {
           id:"11",
-          image:"https://177d01fbswx3jjl1t20gdr8j-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Incline-Push-Up.gif",
+          image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/Handstandshoulderpress.gif",
           name:"Отжимания на наклоне",
           sets:10,
       },
-      {
-          id:"12",
-          image:"https://media.self.com/photos/583c641ca8746f6e65a60c7e/master/w_1600%2Cc_limit/DIAMOND_PUSHUP_MOTIFIED.gif",
-          name:"Наклонные отжимания",
-          sets:10,
-      },
+      
       {
           id:"13",
-          image:"https://cdn.prod.openfit.com/uploads/2020/03/10162714/wide-arm-push-up.gif",
+          image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/09WidePushup.gif",
           name:"Широкие отжимания",
           sets:12,
       },
       {
           id:"14",
-          image:"https://www.yogajournal.com/wp-content/uploads/2021/12/Cobra.gif?width=730",
+          image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/oefeningen2/prone_cobra_on_exercise_mat.gif",
           name:"Кобра растяжка",
           sets:10,
       },
       {
           id:"15",
-          image:"https://www.vissco.com/wp-content/uploads/animation/sub/double-knee-to-chest-stretch.gif",
-          name:"Растяжка груди",
+          image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/Abdominal%20Crunch5.gif",
+          name:"Пресс",
           sets:10,
       }
     ],
@@ -50,37 +45,37 @@ export default [
     image: 
       "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_2.jpg",
     name: "Сет 2",
-    description: "7x4 Упражнений",
+    description: "4x5 Упражнений",
     description2: "Упражнения для корпуса и пресса",
     excersises : [
       {
         id:"90",
-        image:"https://media1.popsugar-assets.com/files/thumbor/f2sbzQY1h1zqiGEV9Mhr1IAcFMU/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/03/13/796/n/1922729/19cf2a4428446429_EXAMPLE.crossjacks.gif",
+        image:"https://www.fitnesschemas.nl/images/Single_Squat_Jump.gif",
         name:"Прыжки",
         sets:12,
       },
       {
         id:"91",
-        image:"https://i.pinimg.com/originals/18/27/be/1827be178c019b1dc6f8a8d8b4a7b0b8.gif",
-        name:"Альпинист",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/suitcase_crunch.gif",
+        name:"Двойные скручивания",
         sets:10,
       },
       {
         id:"92",
-        image:"https://i.pinimg.com/originals/f4/b0/f3/f4b0f3093fcadd64968e4c46d1767b50.gif",
-        name:"Касание пяток",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/ankle_wiggles.gif",
+        name:"Боковые скручивания",
         sets:20,
       },
       {
         id:"94",
-        image:"https://i.pinimg.com/originals/cf/b5/67/cfb5677a755fe7288b608a4fec6f09a0.gif",
+        image:"https://www.fitnesschemas.nl/images/v2/planking.gif",
         name:"Планка",
         sets:10,
       },
       {
         id:"95",
-        image:"https://www.gymguider.com/wp-content/uploads/2017/10/straight-leg-raise.gif",
-        name:"Подъемы ног",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/v-up.gif",
+        name:"Подъемы",
         sets:14,
       }
     ]
@@ -90,49 +85,43 @@ export default [
     image:
       "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_33.jpg",
     name: "Сет 3",
-    description: "7x4 Упражнений",
+    description: "3x6 Упражнений",
     description2: "Руки",
     excersises:[
       {
         id:"70",
-        image:"https://post.healthline.com/wp-content/uploads/2020/06/400x400_How_to_do_Zac_Efrons_Baywatch_Workout_Dumbbell_Lateral_Raise.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/oefeningen2/bent_over_raise_palms_down.gif",
         name:"Подъемы рук",
         sets:8,
       },
       {
         id:"71",
-        image:"https://thumbs.gfycat.com/CompleteZigzagFossa-max-1mb.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/tricepbenchdip.gif",
         name:"Отжимания на трицепс",
         sets:10,
       },
       {
         id:"72",
-        image:"https://thumbs.gfycat.com/MisguidedAridAlaskanmalamute-max-1mb.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/11DiamondPushup.gif",
         name:"Алмазные отжимания",
         sets:10,
       },
       {
         id:"73",
-        image:"https://c.tenor.com/gI-8qCUEko8AAAAC/pushup.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/08StandardPushup.gif",
         name:"Отжимания",
         sets:10,
       },
       {
         id:"74",
-        image:"https://i.pinimg.com/originals/8c/53/27/8c532774e4e1c524576bf1fb829ad895.gif",
+        image:"https://www.fitnesschemas.nl/images/v2/hamer%20curl.gif",
         name:"Сгибание рук с гантелями",
         sets:11,
       
       },
       {
-        id:"75",
-        image:"https://www.vissco.com/wp-content/uploads/animation/sub/inch-worm.gif",
-        name:"Растяжка рук",
-        sets:5,
-      },
-      {
         id:"76",
-        image:"https://c.tenor.com/jqwaOmRs-7gAAAAC/tricep-kick-back-tricep.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/DBLyingTriExt.gif",
         name:"Подъем трицепса",
         sets:8,
       }
@@ -143,43 +132,43 @@ export default [
     image:
       "https://raw.githubusercontent.com/Ivan171777/VKR/main/Fitness_Icon_4.jpg",
     name: "Сет 4",
-    description: "7x4 Упражнений",
+    description: "3x6 Упражнений",
     description2: "Грудной отдел",
     excersises: [
       {
         id:"20",
-        image:"https://i.pinimg.com/originals/ff/cf/40/ffcf40474f0758dfedebc823f5532aa1.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/Handstandshoulderpress.gif",
         name:"Наклоненные отжимания",
         sets:9,
       },
       {
         id:"21",
-        image:"https://image.2bstronger.com/article/fitness/the-14-toughest-do-anywhere-workout-moves-56348/1006.gif",
-        name:"Индуистские отжимания",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/09WidePushup.gif",
+        name:"Широкие отжимания",
         sets:10,
       },
       {
         id:"22",
-        image:"https://thumbs.gfycat.com/TheseRigidBorer-size_restricted.gif",
-        name:"Растяжка плеч",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/DBFly.gif",
+        name:"Бабочка",
         sets:5,
       },
       {
         id:"23",
-        image:"https://thumbs.gfycat.com/AlertAfraidAldabratortoise-max-1mb.gif",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/oefeningen2/prone_cobra_on_exercise_mat.gif",
         name:"Кобра растяжка",
         sets:4,
       },
       {
         id:"25",
-        image:"https://media4.popsugar-assets.com/files/thumbor/BaWEAcCjtJEjiwf3PqJHnZ_S23A/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2016/08/10/766/n/1922729/1eae2dcf3d395379_PushUpTwist.gif",
-        name:"Отжимания и вращение",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/08StandardPushup.gif",
+        name:"Отжимания",
         sets:12,
       },
       {
         id:"26",
-        image:"https://media3.popsugar-assets.com/files/thumbor/0Xiqpo7pxrKz5CKcRl7XYrKegko/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2014/02/27/847/n/1922729/1baf9ec0f5ce4ea9_burpee.3.gif",
-        name:"Берпи",
+        image:"https://www.fitnesschemas.nl/images/v2/dumbbell%20press.gif",
+        name:"Подъемы гантелей",
         sets:10
       }
     ]
@@ -212,10 +201,16 @@ export default [
       },
       {
         id:"123",
-        image:"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDF0cTB4NGd1b3VsdWw4Nzk3cGh2aHc5NW5waWR6emVrZGw1azM1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cgfK6GyhXHpnSqdxc7/giphy.gif",
-        name:"Медитация",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/oefeningen2/bridging.gif",
+        name:"Мостик",
         sets:10,
       },
+      {
+        id:"144",
+        image:"https://www.fitnesschemas.nl/images/voorbeeldoefeningen/oefeningen2/prone_cobra_on_exercise_mat.gif",
+        name:"Кобра растяжка",
+        sets:10,
+    },
     ]
   },
   {
