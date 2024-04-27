@@ -22,6 +22,12 @@ const register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [weight, setWeight] = useState("")
+  const [height, setheight] = useState("")
+  const [goal, setgoal] = useState("")
+  const [emotionalState, setemotionalState] = useState("")
+  const [mentalState, setmentalState] = useState("")
+  const [physicalActivity, setphysicalActivity] = useState("")
   const navigation = useNavigation();
   const router = useRouter();
 
@@ -32,7 +38,7 @@ const register = () => {
       );
     });
 
-    const userData = [name, email, password];
+    const userData = [name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity];
 
     db.transaction(tx => {
       tx.executeSql(

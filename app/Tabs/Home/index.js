@@ -108,6 +108,7 @@ const Index = () => {
         [todo, category, moment().format("D MMMM")],
         () => {
           setTodo("");
+          setCategory("")
           setModalVisible(false);
           getUserTodos();
         },
@@ -336,6 +337,81 @@ const Index = () => {
             />
             <Ionicons onPress={addTodo} name="send" size={24} color="black" />
           </View>
+
+           <Text>Выбор категории</Text>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              marginVertical: 10,
+            }}
+          >
+            <Pressable
+              onPress={() => setCategory("Работа")}
+              style={{
+                borderColor: "#E0E0E0",
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                borderWidth: 1,
+                borderRadius: 25,
+              }}
+            >
+              <Text>Работа</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setCategory("Личное")}
+              style={{
+                borderColor: "#E0E0E0",
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                borderWidth: 1,
+                borderRadius: 25,
+              }}
+            >
+              <Text>Личное</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setCategory("Здоровье")}
+              style={{
+                borderColor: "#E0E0E0",
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                borderWidth: 1,
+                borderRadius: 25,
+              }}
+            >
+              <Text>Здоровье</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setCategory("Спорт")}
+              style={{
+                borderColor: "#E0E0E0",
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                borderWidth: 1,
+                borderRadius: 25,
+              }}
+            >
+              <Text>Спорт</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => setCategory("Другое")}
+              style={{
+                borderColor: "#E0E0E0",
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                borderWidth: 1,
+                borderRadius: 25,
+              }}
+            >
+              <Text>Другое</Text>
+            </Pressable>
+          </View>
+
+
           <Text>Предложенные задачи</Text>
           <View
             style={{

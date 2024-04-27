@@ -1,143 +1,109 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Alert,
-} from "react-native";
-import * as SQLite from 'expo-sqlite';
+import { StyleSheet, Text, View, Pressable, TextInput, Alert } from "react-native";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { Entypo, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as SQLite from 'expo-sqlite';
+import { ScrollView } from "react-native";
+import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const db = SQLite.openDatabase("myappgoals.db");
+const userDB = SQLite.openDatabase('myapp.db'); // База данных с пользователями
+
+const ProfileItem = ({ label, value, secureTextEntry, icon }) => (
+  <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10, backgroundColor: "black", borderRadius: 150}}>
+    <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 20 }}>
+      {icon && icon}
+      <Text style={{ fontSize: 14, fontWeight: "bold", color: "white", padding: 20 }}>{label}:</Text>
+    </View>
+    {secureTextEntry ? (
+      <TextInput
+        value={value}
+        placeholder="********"
+        secureTextEntry={true}
+        style={{ padding: 20, flex: 1, textAlign: "right", color: "white" }}
+        editable={false}
+        selectTextOnFocus={false}
+      />
+    ) : (
+      <Text style={{ padding: 20, color: "white", flexDirection: "row", justifyContent: "space-between" }}>{value}</Text>
+    )}
+  </View>
+);
 
 const Person = () => {
   const [userData, setUserData] = useState(null);
   const navigation = useNavigation();
 
-  const fetchData = () => {
-    db.transaction(tx => {
+  const fetchUserData = () => {
+    userDB.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM users ORDER BY id DESC LIMIT 1',
+        'SELECT * FROM users LIMIT 1',
         [],
         (_, { rows: { _array } }) => {
           if (_array.length > 0) {
-            const { weight, height, goal, emotionalState, mentalState, physicalActivity } = _array[0];
-            setUserData({ weight, height, goal, emotionalState, mentalState, physicalActivity });
+            const { name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity } = _array[0];
+            setUserData({ name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity });
           }
         },
-        error => {
-          console.log(error);
-        }
+        (_, error) => console.log('Error fetching user data:', error)
       );
     });
   };
 
   useEffect(() => {
-    fetchData();
+    fetchUserData();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      fetchData(); // Вызываем функцию fetchData каждый раз при фокусировке на экране
+      fetchUserData(); // Вызываем функцию fetchUserData каждый раз при фокусировке на экране
     }, [])
   );
 
-  const goToEditScreen = () => {
-    navigation.navigate('EditPersonal');
-  };
-
   return (
-    <><View
-    style={{
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 120,
-      backgroundColor: "white",
-      width: "100%",
-      height: "7%",
-    }}
-  >
-    
-    
-    <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-      Персональные цели
-    </Text>
-    
-    <Pressable onPress={() => navigation.navigate('editpersonal')}>
-      <AntDesign style={{marginLeft: -30}} name="edit" size={30} color="black" />
-    </Pressable>
-    </View>
-
-    
-
-
-<View style={styles.userDataContainer}>
-  {userData && (
-    <View style={styles.userDataContent}>
-      <View style={styles.userDataItem}>
-      <MaterialCommunityIcons name="weight-kilogram" size={24} color="black" />
-        <Text> Вес: {userData.weight}</Text>
+    <>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "white",
+          width: "100%",
+          height: "7%",
+        }}
+      >
+        <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
+          Профиль
+        </Text>
+        <View style={{ marginLeft: 230}}>
+          <Pressable onPress={() => navigation.navigate('editpersonal')}>
+            <AntDesign name="edit" size={30} color="black" />
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.userDataItem}>
-      <MaterialCommunityIcons name="human-male-height" size={24} color="black" />
-        <Text> Рост: {userData.height}</Text>
-      </View>
-      <View style={styles.userDataItem}>
-      <MaterialIcons name="food-bank" size={24} color="black" />
-        <Text> Цель диеты: {userData.goal}</Text>
-      </View>
-      <View style={styles.userDataItem}>
-      <MaterialIcons name="emoji-emotions" size={24} color="black" />
-        <Text> Эмоциональное состояние: {userData.emotionalState}</Text>
-      </View>
-      <View style={styles.userDataItem}>
-      <FontAwesome6 name="brain" size={24} color="black" />
-        <Text> Ментальное состояние: {userData.mentalState}</Text>
-      </View>
-      <View style={styles.userDataItem}>
-      <FontAwesome5 name="running" size={24} color="black" />
-        <Text> Физическая активность: {userData.physicalActivity}</Text>
-      </View>
-    </View>
-  )}
-</View>
 
-
-
-</>
+      <ScrollView style={{ backgroundColor: "white"}}>
+      <View style={{ backgroundColor: "white", width: "100%", height: "100%"}}>
+        <View style ={{alignItems: "center"}}>
+          <MaterialIcons name="account-circle" size={100} color="black" />
+        </View>
+        <View style={{ backgroundColor: "white", padding: 20 }}>
+          <ProfileItem label="Имя" value={userData && userData.name} icon={<MaterialIcons name="account-circle" size={24} color="white" />} />
+          <ProfileItem label="Почта" value={userData && userData.email} icon={<MaterialIcons name="email" size={24} color="white" />} />
+          <ProfileItem label="Пароль" value={userData && userData.password} secureTextEntry icon={<AntDesign name="lock1" size={24} color="white" />} />
+          <ProfileItem label="Вес" value={userData && userData.weight} icon={<MaterialCommunityIcons name="weight-kilogram" size={24} color="white" />} />
+          <ProfileItem label="Рост" value={userData && userData.height} icon={<MaterialCommunityIcons name="human-male-height" size={24} color="white" />} />
+          <ProfileItem label="Цель диеты" value={userData && userData.goal} icon={<MaterialIcons name="food-bank" size={24} color="white" />} />
+          <ProfileItem label="Эмоциональное состояние" value={userData && userData.emotionalState} icon={<MaterialIcons name="emoji-emotions" size={24} color="white" />} />
+          <ProfileItem label="Ментальное состояние" value={userData && userData.mentalState} icon={<FontAwesome6 name="brain" size={24} color="white" />} />
+          <ProfileItem label="Физическая активность" value={userData && userData.physicalActivity} icon={<FontAwesome5 name="running" size={24} color="white" />} />
+        </View>
+      </View>
+      </ScrollView>
+    </>
   );
 };
-const styles = StyleSheet.create({
-  userDataContainer: {
-    backgroundColor: "#f0f0f0",
-    borderRadius: 10,
-    padding: 20,
-    margin: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  userDataContent: {
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
-  userDataItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-});
-
 
 export default Person;
+
+const styles = StyleSheet.create({});

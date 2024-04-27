@@ -5,14 +5,15 @@ import { useRoute, useNavigation } from "@react-navigation/native"; // Импо�
 import { AntDesign, Feather } from "@expo/vector-icons";
 import * as SQLite from 'expo-sqlite';
 import { useLocalSearchParams } from "expo-router";
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const db = SQLite.openDatabase('my-app.db');
 
 const Info = () => {
   const navigation = useNavigation(); // Используем useNavigation для доступа к объекту navigation
   const route = useRoute();
-  const { id, title, category, dueDate } = route.params; // Извлекаем параметры маршрута
+  const { id, title, category, DueDate } = route.params; // Извлекаем параметры маршрута
   const [newTitle, setNewTitle] = useState(title); // Используем title из параметров маршрута
   const params = useLocalSearchParams();
 
@@ -39,13 +40,8 @@ const Info = () => {
         }}
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" onPress={() => navigation.goBack()} />
-        <Entypo name="dots-three-vertical" size={24} color="black" />
-      </View>
-
-      <View style={{ marginTop: 5 }}>
-        <Text style={{ fontSize: 15, fontWeight: "500" }}>
-          Category - {category} {/* Используем category из параметров маршрута */}
-        </Text>
+        <FontAwesome style={{ marginRight: 5 }} name="save" size={24} color="black" onPress={updateTitle}/>
+        
       </View>
 
       <TextInput
@@ -53,18 +49,6 @@ const Info = () => {
         value={newTitle}
         onChangeText={setNewTitle}
       />
-
-      <View style={{ marginTop: 50 }} />
-
-      <Pressable
-        style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
-        onPress={updateTitle}
-      >
-        <AntDesign name="plus" size={24} color="#7CB9E8" />
-        <Text style={{ color: "#7CB9E8", fontSize: 16, fontWeight: "500" }}>
-          Add a subtask
-        </Text>
-      </Pressable>
 
       <View style={{ marginTop: 15 }}>
         <View
@@ -76,7 +60,7 @@ const Info = () => {
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
             <AntDesign name="calendar" size={24} color="black" />
-            <Text>Due Date</Text>
+            <Text>Дата</Text>
           </View>
 
           <Pressable
@@ -87,7 +71,7 @@ const Info = () => {
         </View>
       </View>
 
-      <View style={{ marginTop: 15 }}>
+      <View style={{ marginTop: 15, marginLeft: 0  }}>
         <View
           style={{
             flexDirection: "row",
@@ -96,60 +80,18 @@ const Info = () => {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
-            <Ionicons name="time-sharp" size={24} color="gray" />
-            <Text>Time and Reminder</Text>
+          <MaterialCommunityIcons name="table-of-contents" size={24} color="black" />
+            <Text>Категория</Text>
           </View>
 
           <Pressable
             style={{ backgroundColor: "#F0F0F0", padding: 7, borderRadius: 6 }}
           >
-            <Text>No</Text>
+            <Text>{category}</Text>
           </Pressable>
         </View>
       </View>
-
-      <View style={{ marginTop: 15 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
-            <Feather name="repeat" size={24} color="black" />
-            <Text>Repeat Task</Text>
-          </View>
-
-          <Pressable
-            style={{ backgroundColor: "#F0F0F0", padding: 7, borderRadius: 6 }}
-          >
-            <Text>No</Text>
-          </Pressable>
-        </View>
       </View>
-
-      <View style={{ marginTop: 15 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
-          <SimpleLineIcons name="note" size={24} color="black" />
-            <Text>Notes</Text>
-          </View>
-
-          <Pressable
-            style={{ backgroundColor: "#F0F0F0", padding: 7, borderRadius: 6 }}
-          >
-            <Text>Not Added</Text>
-          </Pressable>
-        </View>
-      </View>
-    </View>
   );
 };
 

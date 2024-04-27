@@ -84,6 +84,7 @@ const Index = () => {
         </Text>
       </View>
       <View style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
+      <Pressable onPress={() => navigation.navigate('person')}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
           <MaterialIcons name="account-circle" size={60} color="black" />
           <View>
@@ -94,9 +95,9 @@ const Index = () => {
             {userData.email}
             </Text>
           </View>
-        </View>
+        </View></Pressable>
         <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25}}>
-          <Pressable onPress={() => navigation.navigate('person')}>
+          <Pressable onPress={() => navigation.navigate('goals')}>
                 <MaterialIcons style={{marginLeft: 10}} name="switch-account" size={24} color="white" />
                 <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
                   Персональные цели
@@ -162,7 +163,7 @@ const Index = () => {
           
                 <Entypo style={{marginLeft: 10}} name="bar-graph" size={24} color="black" />
                 <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
-                Сводная статистика
+                Статистика
                 </Text>
 
         </View>

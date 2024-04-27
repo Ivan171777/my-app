@@ -6,6 +6,7 @@ export default function Layout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="person" options={{ headerShown: false }} />
       <Stack.Screen name="editpersonal" options={{ headerShown: false }} />
+      <Stack.Screen name="goals" options={{ headerShown: false }} />
     </Stack>
   );
 }
