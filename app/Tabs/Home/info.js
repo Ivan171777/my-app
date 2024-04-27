@@ -1,12 +1,34 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
 import { Ionicons, Entypo } from "@expo/vector-icons";
-import { useLocalSearchParams } from "expo-router";
+import { useRoute, useNavigation } from "@react-navigation/native"; // Импортируем useNavigation
 import { AntDesign, Feather } from "@expo/vector-icons";
+import * as SQLite from 'expo-sqlite';
+import { useLocalSearchParams } from "expo-router";
 import { SimpleLineIcons } from '@expo/vector-icons';
 
-const info = () => {
+const db = SQLite.openDatabase('my-app.db');
+
+const Info = () => {
+  const navigation = useNavigation(); // Используем useNavigation для доступа к объекту navigation
+  const route = useRoute();
+  const { id, title, category, dueDate } = route.params; // Извлекаем параметры маршрута
+  const [newTitle, setNewTitle] = useState(title); // Используем title из параметров маршрута
   const params = useLocalSearchParams();
+
+  const updateTitle = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'UPDATE tasktodos SET title = ? WHERE id = ?',
+        [newTitle, id], // Используем id из параметров маршрута
+        () => {
+          navigation.navigate('index', { updatedTitle: newTitle });
+        },
+        (_, error) => console.log(error)
+      );
+    });
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "white", padding: 10 }}>
       <View
@@ -16,23 +38,28 @@ const info = () => {
           justifyContent: "space-between",
         }}
       >
-        <Ionicons name="arrow-back-outline" size={24} color="black" />
+        <Ionicons name="arrow-back-outline" size={24} color="black" onPress={() => navigation.goBack()} />
         <Entypo name="dots-three-vertical" size={24} color="black" />
       </View>
 
       <View style={{ marginTop: 5 }}>
         <Text style={{ fontSize: 15, fontWeight: "500" }}>
-          Category - {params?.category}
+          Category - {category} {/* Используем category из параметров маршрута */}
         </Text>
       </View>
 
-      <Text style={{ marginTop: 20, fontSize: 17, fontWeight: "600" }}>
-        {params?.title}
-      </Text>
+      <TextInput
+        style={{ marginTop: 20, fontSize: 17, fontWeight: "600" }}
+        value={newTitle}
+        onChangeText={setNewTitle}
+      />
 
       <View style={{ marginTop: 50 }} />
 
-      <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+      <Pressable
+        style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
+        onPress={updateTitle}
+      >
         <AntDesign name="plus" size={24} color="#7CB9E8" />
         <Text style={{ color: "#7CB9E8", fontSize: 16, fontWeight: "500" }}>
           Add a subtask
@@ -126,6 +153,6 @@ const info = () => {
   );
 };
 
-export default info;
+export default Info;
 
 const styles = StyleSheet.create({});

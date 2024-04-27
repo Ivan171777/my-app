@@ -6,7 +6,7 @@ import { ModalTitle, ModalContent } from "react-native-modals";
 import { SlideAnimation } from "react-native-modals";
 import { Entypo, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import moment from "moment";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import 'moment/locale/ru';
 
@@ -14,6 +14,7 @@ const db = SQLite.openDatabase('my-app.db');
 
 const Index = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const [tasktodos, setTodos] = useState([]);
   const today = moment().locale('ru').format("D MMMM");
   const [isModalVisible, setModalVisible] = useState(false);
@@ -49,11 +50,10 @@ const Index = () => {
   ];
 
   useEffect(() => {
-      console.log("Уведомления успешно подключены"); 
     const unsubscribe = navigation.addListener('focus', () => {
       getUserTodos();
     });
-
+  
     return unsubscribe;
   }, [navigation]);
 
@@ -69,6 +69,19 @@ const Index = () => {
 
     getUserTodos();
   }, []);
+
+  useEffect(() => {
+    const updatedTitle = route.params?.updatedTitle;
+    if (updatedTitle) {
+      // Если есть обновленное название задачи, обновляем его в state
+      setTodos(prevTodos => prevTodos.map(todo => {
+        if (todo.id === route.params?.id) {
+          return { ...todo, title: updatedTitle };
+        }
+        return todo;
+      }));
+    }
+  }, [route.params]);
 
   const getUserTodos = () => {
     db.transaction(tx => {
