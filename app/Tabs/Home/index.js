@@ -158,6 +158,7 @@ const Index = () => {
   };
 
   const selectedDateFormat = selectedDate.locale('ru').format("D MMMM");
+  const selectedDateFormat2 = selectedDate.locale('ru').format("D:MM");
 
   return (
     <>
@@ -178,19 +179,24 @@ const Index = () => {
           Задачи
         </Text>
 
+        <View style={{marginTop: 5, marginHorizontal: -107, alignItems: "center", backgroundColor: "white"}}>
+        <TouchableOpacity onPress={showDatePicker}>
+          <View style={{padding: 10, width: 160, alignItems: "center", backgroundColor: "black", borderRadius: 25}}>
+            <Text style={{fontSize: 16, fontWeight: 600, color: "white"}}>{selectedDateFormat}</Text>
+          </View>
+          
+        </TouchableOpacity>
+        </View>
         
         <Pressable 
-          style={{marginTop: 5, marginHorizontal: 140}} 
+          style={{marginTop: 5, marginHorizontal: 70}} 
           onPress={() => setModalVisible(!isModalVisible)}>
           <AntDesign name="pluscircle" size={35} color="black" />
         </Pressable>
-      </View>
-
-      <TouchableOpacity onPress={showDatePicker}>
-          <Text>{selectedDateFormat}</Text>
-        </TouchableOpacity>
+      </View>  
 
       <DateTimePickerModal
+        style={{backgroundColor: "white" }}
         isVisible={isDatePickerVisible}
         mode="date"
         textColor="black"
@@ -202,7 +208,7 @@ const Index = () => {
         <View style={{ padding: 10 }}>
           {tasktodos?.length > 0 ? (
             <View>
-              {pendingTodos?.length > 0 && <Text>Дата: {selectedDateFormat}</Text>}
+              {pendingTodos?.length > 0 && <Text>Дата: {selectedDateFormat2}</Text>}
 
               {pendingTodos?.map((item, index) => (
                 <Pressable

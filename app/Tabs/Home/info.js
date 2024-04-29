@@ -1,27 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Pressable, StyleSheet, Text, View, TextInput } from "react-native";
-import { Ionicons, Entypo } from "@expo/vector-icons";
-import { useRoute, useNavigation } from "@react-navigation/native"; // Импортируем useNavigation
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { Ionicons, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import * as SQLite from 'expo-sqlite';
-import { useLocalSearchParams } from "expo-router";
-import { FontAwesome } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const db = SQLite.openDatabase('my-app.db');
 
 const Info = () => {
-  const navigation = useNavigation(); // Используем useNavigation для доступа к объекту navigation
+  const navigation = useNavigation();
   const route = useRoute();
-  const { id, title, category, DueDate } = route.params; // Извлекаем параметры маршрута
-  const [newTitle, setNewTitle] = useState(title); // Используем title из параметров маршрута
-  const params = useLocalSearchParams();
+  const { id, title, category } = route.params;
+  const [newTitle, setNewTitle] = useState(title);
+  const [createdAt, setCreatedAt] = useState(""); // Добавляем состояние для даты создания
+
+  useEffect(() => {
+    fetchTaskData();
+  }, []);
+
+  const fetchTaskData = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM tasktodos WHERE id = ?',
+        [id],
+        (_, { rows: { _array } }) => {
+          if (_array.length > 0) {
+            const task = _array[0];
+            setCreatedAt(task.date); // Устанавливаем дату создания из базы данных
+          }
+        },
+        (_, error) => console.log(error)
+      );
+    });
+  };
 
   const updateTitle = () => {
     db.transaction(tx => {
       tx.executeSql(
         'UPDATE tasktodos SET title = ? WHERE id = ?',
-        [newTitle, id], // Используем id из параметров маршрута
+        [newTitle, id],
         () => {
           navigation.navigate('index', { updatedTitle: newTitle });
         },
@@ -40,8 +56,7 @@ const Info = () => {
         }}
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" onPress={() => navigation.goBack()} />
-        <FontAwesome style={{ marginRight: 5 }} name="save" size={24} color="black" onPress={updateTitle}/>
-        
+        <AntDesign style={{ marginRight: 5 }} name="save" size={24} color="black" onPress={updateTitle}/>
       </View>
 
       <TextInput
@@ -60,13 +75,13 @@ const Info = () => {
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
             <AntDesign name="calendar" size={24} color="black" />
-            <Text>Дата</Text>
+            <Text>Дата создания</Text>
           </View>
 
           <Pressable
             style={{ backgroundColor: "#F0F0F0", padding: 7, borderRadius: 6 }}
           >
-            <Text>{params?.dueDate}</Text>
+            <Text>{createdAt}</Text>
           </Pressable>
         </View>
       </View>
@@ -80,7 +95,7 @@ const Info = () => {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: 7 }}>
-          <MaterialCommunityIcons name="table-of-contents" size={24} color="black" />
+            <MaterialCommunityIcons name="table-of-contents" size={24} color="black" />
             <Text>Категория</Text>
           </View>
 
@@ -91,7 +106,7 @@ const Info = () => {
           </Pressable>
         </View>
       </View>
-      </View>
+    </View>
   );
 };
 
