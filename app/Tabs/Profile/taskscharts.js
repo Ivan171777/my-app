@@ -1,8 +1,6 @@
-// Profile.js
-
 import { Image, StyleSheet, Text, View, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import { BarChart } from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit"; // Измененный импорт
 import { MaterialIcons } from '@expo/vector-icons';
 import * as SQLite from 'expo-sqlite';
 import { useNavigation } from '@react-navigation/native';
@@ -13,7 +11,7 @@ import moment from 'moment';
 const db = SQLite.openDatabase('my-app.db');
 
 const Profile = () => {
-  const [chartData, setChartData] = useState({ labels: [], data: [[], []] });
+  const [chartData, setChartData] = useState({ labels: [], totalData: [], completedData: [] });
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -34,13 +32,19 @@ const Profile = () => {
         'SELECT date, COUNT(*) AS total, SUM(CASE WHEN status = "completed" THEN 1 ELSE 0 END) AS completed FROM tasktodos GROUP BY date',
         [],
         (_, { rows: { _array } }) => {
-          const labels = _array.map(item => moment(item.date, 'D.MM').format('D.MM'));
-          const data = [_array.map(item => item.total), _array.map(item => item.completed)];
-          setChartData({ labels, data });
+          const labels = _array.map(item => moment(item.date, 'DD MMMM').format('DD.MM'));
+          const totalData = _array.map(item => item.total || 0);
+          const completedData = _array.map(item => item.completed || 0);
+          setChartData({ labels, totalData, completedData });
         },
         (_, error) => console.log('Error fetching data:', error)
       );
     });
+  };
+
+  // Проверка на нулевые или недопустимые значения
+  const isValidData = (data) => {
+    return data && Array.isArray(data) && data.length > 0 && data.every(val => !isNaN(val));
   };
 
   return (
@@ -79,9 +83,9 @@ const Profile = () => {
               }}
             >
               <Text
-                style={{ color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
+                style={{ color: "#008000", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                Выполненные: {chartData.data[1].reduce((a, b) => a + b, 0)}
+                Выполненные: {isValidData(chartData.completedData) ? chartData.completedData.reduce((a, b) => a + b, 0) : 0}
               </Text>
             </View>
             <View
@@ -96,27 +100,31 @@ const Profile = () => {
               <Text
                 style={{ color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
               >
-                Всего задач: {chartData.data[0].reduce((a, b) => a + b, 0)}
+                Всего задач: {isValidData(chartData.totalData) ? chartData.totalData.reduce((a, b) => a + b, 0) : 0}
               </Text>
             </View>
           </View>
         </View>
-        <View style={{backgroundColor: "black", padding: 20, borderRadius: 25}}>
-          <BarChart
+        <View style={{backgroundColor: "black", padding: 10, borderRadius: 25}}>
+          <LineChart // Измененный компонент
             data={{
               labels: chartData.labels,
               datasets: [
                 {
-                  data: chartData.data[0],
+                  data: isValidData(chartData.totalData) ? chartData.totalData : [],
+                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Цвет для линии "всего задач"
+                  strokeWidth: 1, // Ширина линии
                 },
                 {
-                  data: chartData.data[1],
+                  data: isValidData(chartData.completedData) ? chartData.completedData : [],
+                  color: (opacity = 1) => `rgba(0, 128, 0, ${opacity})`, // Цвет для линии "выполненные задачи"
+                  strokeWidth: 1, // Ширина линии
                 },
               ],
             }}
             width={Dimensions.get("window").width - 40} // from react-native
             height={220}
-            yAxisInterval={2} // optional
+            yAxisInterval={6} // optional
             chartConfig={{
               backgroundColor: "white",
               backgroundGradientFrom: "#000000",
@@ -128,8 +136,8 @@ const Profile = () => {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "6",
-                strokeWidth: "2",
+                r: "4",
+                strokeWidth: "1",
                 stroke: "black",
               },
             }}

@@ -50,6 +50,28 @@ const Index = () => {
       todo: "Завершить задачи",
     },
   ];
+  const suggestions2 = [
+    {
+      id: "0",
+      category: "Работа",
+    },
+    {
+      id: "1",
+      category: "Личное",
+    },
+    {
+      id: "2",
+      category: "Здоровье",
+    },
+    {
+      id: "3",
+      category: "Спорт",
+    },
+    {
+      id: "4",
+      category: "Другое",
+    },
+  ];
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -158,7 +180,7 @@ const Index = () => {
   };
 
   const selectedDateFormat = selectedDate.locale('ru').format("D MMMM");
-  const selectedDateFormat2 = selectedDate.locale('ru').format("D:MM");
+  const selectedDateFormat2 = selectedDate.locale('ru').format("DD:MM");
 
   return (
     <>
@@ -335,7 +357,7 @@ const Index = () => {
           )}
         </View>
       </ScrollView>
-
+      
       <BottomModal
         onBackdropPress={() => setModalVisible(!isModalVisible)}
         onHardwareBackPress={() => setModalVisible(!isModalVisible)}
@@ -350,7 +372,7 @@ const Index = () => {
         visible={isModalVisible}
         onTouchOutside={() => setModalVisible(!isModalVisible)}
       >
-        <ModalContent style={{ width: "100%", height: 280, backgroundColor: "white" }}>
+        <ModalContent style={{ width: "100%", height: 620, backgroundColor: "white" }}>
           <View
             style={{
               marginVertical: 10,
@@ -365,89 +387,16 @@ const Index = () => {
               placeholder="Введите новую задачу"
               style={{
                 padding: 10,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 5,
+                borderColor: "grey",
+                borderWidth: 0.3,
+                borderRadius: 25,
                 flex: 1,
               }}
             />
+            
             <Ionicons onPress={addTodo} name="send" size={24} color="black" />
           </View>
-
-           <Text>Выбор категории</Text>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 10,
-              marginVertical: 10,
-            }}
-          >
-            <Pressable
-              onPress={() => setCategory("Работа")}
-              style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
-              }}
-            >
-              <Text>Работа</Text>
-            </Pressable>
-            <Pressable
-              onPress={() => setCategory("Личное")}
-              style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
-              }}
-            >
-              <Text>Личное</Text>
-            </Pressable>
-            <Pressable
-              onPress={() => setCategory("Здоровье")}
-              style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
-              }}
-            >
-              <Text>Здоровье</Text>
-            </Pressable>
-            <Pressable
-              onPress={() => setCategory("Спорт")}
-              style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
-              }}
-            >
-              <Text>Спорт</Text>
-            </Pressable>
-
-            <Pressable
-              onPress={() => setCategory("Другое")}
-              style={{
-                borderColor: "#E0E0E0",
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                borderWidth: 1,
-                borderRadius: 25,
-              }}
-            >
-              <Text>Другое</Text>
-            </Pressable>
-          </View>
-
-
+          
           <Text>Предложенные задачи</Text>
           <View
             style={{
@@ -473,6 +422,60 @@ const Index = () => {
               </Pressable>
             ))}
           </View>
+
+          <View
+            style={{
+              marginVertical: 7,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              width: "92%"
+            }}
+          >
+            <TextInput
+              value={category}
+              onChangeText={(text) => setCategory(text)}
+              placeholder="Введите категорию задачи"
+              style={{
+                padding: 10,
+                borderColor: "grey",
+                borderWidth: 0.3,
+                borderRadius: 25,
+                flex: 1,
+              }}
+            />
+
+          </View>
+          
+          <Text>Предложенные категории</Text>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              flexWrap: "wrap",
+              marginVertical: 10,
+            }}
+          >
+            {suggestions2?.map((item, index) => (
+              <Pressable
+                onPress={() => setCategory(item?.category)}
+                style={{
+                  backgroundColor: "white",
+                  borderWidth: 1,
+                  borderColor: "black",
+                  paddingHorizontal: 15,
+                  paddingVertical: 8,
+                  borderRadius: 25,
+                }}
+                key={index}
+              >
+                <Text style={{color: "black", textAlign: "center" }}>{item?.category}</Text>
+              </Pressable>
+            ))}
+          </View>
+          
         </ModalContent>
       </BottomModal>
     </>
