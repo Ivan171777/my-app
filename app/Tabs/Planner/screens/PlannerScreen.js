@@ -9,7 +9,9 @@ const db = SQLite.openDatabase('my-app.db');
 
 const PlannerScreen = () => {
   const currentDate = moment();
-  const startOfWeek = currentDate.clone().startOf('week');
+  const startOfCurrentWeek = currentDate.clone().startOf('week');
+  const startOfPreviousWeek = startOfCurrentWeek.clone().subtract(1, 'week');
+  const startOfNextWeek = startOfCurrentWeek.clone().add(1, 'week');
   const [menuData, setMenuData] = useState([]);
 
   useEffect(() => {
@@ -37,16 +39,16 @@ const PlannerScreen = () => {
     });
   };
 
-  const renderWeekDates = startOfWeek => {
+  const renderWeekDates = (startOfWeek, key) => {
     let weekDates = [];
     for (let i = 0; i < 7; i++) {
       const date = startOfWeek.clone().add(i, 'days');
       const formattedDate = date.format('D MMMM');
-      const tasksForDate = menuData.filter(menu => moment(menu.createdAt).format('D MMMM') === formattedDate); // Фильтруем задачи для текущей даты
+      const tasksForDate = menuData.filter(menu => moment(menu.date, 'D MMMM').isSame(date, 'day')); // Фильтруем задачи для текущей даты
       const isCurrentDate = date.isSame(currentDate, 'day');
   
       weekDates.push(
-        <View key={formattedDate}>
+        <View key={`${key}_${formattedDate}`}>
           <View
             style={[
               {
@@ -103,7 +105,7 @@ const PlannerScreen = () => {
             {tasksForDate.length > 0 ? (
               tasksForDate.map((task, index) => (
                 <Text
-                  key={index}
+                  key={`${key}_${formattedDate}_${index}`}
                   style={{
                     textAlign: "left",
                     marginTop: 2,
@@ -147,15 +149,16 @@ const PlannerScreen = () => {
   };
   
 
-  const renderWeeks = numWeeks => {
+  const renderWeeks = () => {
     const weeks = [];
-    for (let i = 0; i < numWeeks; i++) {
+    for (let i = -1; i <= 1; i++) {
+      const startOfWeek = currentDate.clone().startOf('week').add(i, 'week');
       weeks.push(
         <View key={i}>
           <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 10, marginTop: 10 }}>
-            {startOfWeek.clone().add(i * 7, 'days').format('DD MMM')}
+            {startOfWeek.format('DD MMM')}
           </Text>
-          <View>{renderWeekDates(startOfWeek.clone().add(i * 7, 'days'))}</View>
+          <View>{renderWeekDates(startOfWeek, i)}</View>
         </View>
       );
     }
@@ -187,7 +190,7 @@ const PlannerScreen = () => {
       </View>
       <ScrollView style={{ marginTop: 0 }}>
         <View style={{ flex: 1, padding: 12 }}>
-          {renderWeeks(3)}
+          {renderWeeks()}
         </View>
       </ScrollView>
     </>

@@ -9,6 +9,8 @@ import moment from "moment";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import 'moment/locale/ru';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { TouchableOpacity } from "react-native";
 
 const db = SQLite.openDatabase('my-app.db');
 
@@ -16,9 +18,9 @@ const Index = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [tasktodos, setTodos] = useState([]);
-  const today = moment().locale('ru').format("D MMMM");
+  const [selectedDate, setSelectedDate] = useState(moment());
   const [isModalVisible, setModalVisible] = useState(false);
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("");
   const [todo, setTodo] = useState("");
   const [pendingTodos, setPendingTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
@@ -67,27 +69,22 @@ const Index = () => {
       );
     });
 
+    
+
     getUserTodos();
   }, []);
 
   useEffect(() => {
-    const updatedTitle = route.params?.updatedTitle;
-    if (updatedTitle) {
-      // Если есть обновленное название задачи, обновляем его в state
-      setTodos(prevTodos => prevTodos.map(todo => {
-        if (todo.id === route.params?.id) {
-          return { ...todo, title: updatedTitle };
-        }
-        return todo;
-      }));
-    }
-  }, [route.params]);
+    getUserTodos();
+  }, [selectedDate]);
+  
 
   const getUserTodos = () => {
+    const selectedDateFormatted = selectedDate.format("D MMMM");
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM tasktodos',
-        [],
+        'SELECT * FROM tasktodos WHERE date = ?',
+        [selectedDateFormatted],
         (_, { rows: { _array } }) => {
           setTodos(_array);
 
@@ -102,10 +99,11 @@ const Index = () => {
   };
 
   const addTodo = () => {
+    const selectedDateFormatted = selectedDate.format("D MMMM");
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO tasktodos (title, category, date) VALUES (?, ?, ?)',
-        [todo, category, moment().format("D MMMM")],
+        [todo, category, selectedDateFormatted],
         () => {
           setTodo("");
           setCategory("")
@@ -143,8 +141,28 @@ const Index = () => {
     });
   };
 
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
+  };
+
+  const handleConfirmDate = (date) => {
+    setSelectedDate(moment(date));
+    hideDatePicker();
+    getUserTodos(); // Обновление задач после выбора даты
+  };
+
+  const selectedDateFormat = selectedDate.locale('ru').format("D MMMM");
+
   return (
     <>
+
+    
       <View
         style={{
           flexDirection: "row",
@@ -155,24 +173,36 @@ const Index = () => {
           height: "7%",
         }}
       >
-        
-        
-        <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
+
+<Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
           Задачи
         </Text>
-        
+
         
         <Pressable 
-        style={{marginTop: 5, marginHorizontal: 140}} onPress={() => setModalVisible(!isModalVisible)}>
+          style={{marginTop: 5, marginHorizontal: 140}} 
+          onPress={() => setModalVisible(!isModalVisible)}>
           <AntDesign name="pluscircle" size={35} color="black" />
         </Pressable>
       </View>
+
+      <TouchableOpacity onPress={showDatePicker}>
+          <Text>{selectedDateFormat}</Text>
+        </TouchableOpacity>
+
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        textColor="black"
+        onConfirm={handleConfirmDate}
+        onCancel={hideDatePicker}
+      />
 
       <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ padding: 10 }}>
           {tasktodos?.length > 0 ? (
             <View>
-              {pendingTodos?.length > 0 && <Text>Дата: {today}</Text>}
+              {pendingTodos?.length > 0 && <Text>Дата: {selectedDateFormat}</Text>}
 
               {pendingTodos?.map((item, index) => (
                 <Pressable
