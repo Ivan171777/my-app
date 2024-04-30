@@ -113,7 +113,8 @@ const PlannerScreen = () => {
                     marginLeft: 10,
                     fontSize: 12,
                     fontWeight: '600',
-                    textDecorationLine: task.status === 'completed' ? 'line-through' : '',
+                    textDecorationLine: task.status === 'completed' ? 'line-through' : 'none',
+
                     
                   }}
                 >

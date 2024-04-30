@@ -29,18 +29,20 @@ const Profile = () => {
   const fetchData = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT date, COUNT(*) AS total, SUM(CASE WHEN status = "completed" THEN 1 ELSE 0 END) AS completed FROM tasktodos GROUP BY date',
+        'SELECT date, COUNT(*) AS total, SUM(CASE WHEN status = "completed" THEN 1 ELSE 0 END) AS completed FROM tasktodos GROUP BY date ORDER BY date DESC LIMIT 7', // Обновленный запрос с использованием ORDER BY и LIMIT
         [],
         (_, { rows: { _array } }) => {
-          const labels = _array.map(item => moment(item.date, 'DD MMMM').format('DD.MM'));
-          const totalData = _array.map(item => item.total || 0);
-          const completedData = _array.map(item => item.completed || 0);
+          const reversedArray = _array.reverse(); // Переворачиваем массив, чтобы отображать данные в хронологическом порядке
+          const labels = reversedArray.map(item => moment(item.date, 'DD MMMM').format('DD.MM'));
+          const totalData = reversedArray.map(item => item.total || 0);
+          const completedData = reversedArray.map(item => item.completed || 0);
           setChartData({ labels, totalData, completedData });
         },
         (_, error) => console.log('Error fetching data:', error)
       );
     });
   };
+  
 
   // Проверка на нулевые или недопустимые значения
   const isValidData = (data) => {

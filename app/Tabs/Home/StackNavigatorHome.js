@@ -3,6 +3,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import index from './index';
 import info from './info';
+import task from './task';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ const StackNavigatorHome = () => {
         options={{headerShown: false}}
         name="Menu"
         component={info}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="Task"
+        component={task}
       />
     </Stack.Navigator>
   );

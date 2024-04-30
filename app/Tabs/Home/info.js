@@ -56,7 +56,7 @@ const Info = () => {
         }}
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" onPress={() => navigation.goBack()} />
-        <AntDesign style={{ marginRight: 5 }} name="save" size={24} color="black" onPress={updateTitle}/>
+        <Ionicons style={{ marginRight: 5 }} name="checkmark-done" size={24} color="black" onPress={updateTitle}/>
       </View>
 
       <TextInput
