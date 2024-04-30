@@ -9,7 +9,7 @@ import { Entypo } from "@expo/vector-icons";
 import moment from 'moment'; // Импорт библиотеки moment для работы с датами
 
 const db = SQLite.openDatabase('my-app.db'); // Ваша база данных
-const userDB = SQLite.openDatabase('myapp.db'); // База данных с пользователями
+const userDB = SQLite.openDatabase('user-myapp.db'); // База данных с пользователями
 
 const Profile = () => {
   const [completedTasks, setCompletedTasks] = useState(0);

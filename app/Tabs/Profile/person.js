@@ -8,7 +8,7 @@ import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const userDB = SQLite.openDatabase('myapp.db'); // База данных с пользователями
+const db = SQLite.openDatabase("user-myapp.db");
 
 const ProfileItem = ({ label, value, secureTextEntry, icon }) => (
   <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10, backgroundColor: "black", borderRadius: 150}}>
@@ -36,7 +36,7 @@ const Person = () => {
   const navigation = useNavigation();
 
   const fetchUserData = () => {
-    userDB.transaction(tx => {
+    db.transaction(tx => {
       tx.executeSql(
         'SELECT * FROM users LIMIT 1',
         [],
@@ -57,48 +57,40 @@ const Person = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      fetchUserData(); // Вызываем функцию fetchUserData каждый раз при фокусировке на экране
+      fetchUserData();
     }, [])
   );
 
   return (
     <>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "white",
-          width: "100%",
-          height: "7%",
-        }}
-      >
+      <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "white", width: "100%", height: "7%" }}>
         <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
           Профиль
         </Text>
-        <View style={{ marginLeft: 230}}>
+        <View style={{ marginLeft: 230 }}>
           <Pressable onPress={() => navigation.navigate('editpersonal')}>
             <AntDesign name="edit" size={30} color="black" />
           </Pressable>
         </View>
       </View>
 
-      <ScrollView style={{ backgroundColor: "white"}}>
-      <View style={{ backgroundColor: "white", width: "100%", height: "100%"}}>
-        <View style ={{alignItems: "center"}}>
-          <MaterialIcons name="account-circle" size={100} color="black" />
+      <ScrollView style={{ backgroundColor: "white" }}>
+        <View style={{ backgroundColor: "white", width: "100%", height: "100%" }}>
+          <View style={{ alignItems: "center" }}>
+            <MaterialIcons name="account-circle" size={100} color="black" />
+          </View>
+          <View style={{ backgroundColor: "white", padding: 20 }}>
+            <ProfileItem label="Имя" value={userData && userData.name} icon={<MaterialIcons name="account-circle" size={24} color="white" />} />
+            <ProfileItem label="Почта" value={userData && userData.email} icon={<MaterialIcons name="email" size={24} color="white" />} />
+            <ProfileItem label="Пароль" value={userData && userData.password} secureTextEntry icon={<AntDesign name="lock1" size={24} color="white" />} />
+            <ProfileItem label="Вес" value={userData && userData.weight} icon={<MaterialCommunityIcons name="weight-kilogram" size={24} color="white" />} />
+            <ProfileItem label="Рост" value={userData && userData.height} icon={<MaterialCommunityIcons name="human-male-height" size={24} color="white" />} />
+            <ProfileItem label="Цель диеты" value={userData && userData.goal} icon={<MaterialIcons name="food-bank" size={24} color="white" />} />
+            <ProfileItem label="Эмоциональное состояние" value={userData && userData.emotionalState} icon={<MaterialIcons name="emoji-emotions" size={24} color="white" />} />
+            <ProfileItem label="Ментальное состояние" value={userData && userData.mentalState} icon={<FontAwesome6 name="brain" size={24} color="white" />} />
+            <ProfileItem label="Физическая активность" value={userData && userData.physicalActivity} icon={<FontAwesome5 name="running" size={24} color="white" />} />
+          </View>
         </View>
-        <View style={{ backgroundColor: "white", padding: 20 }}>
-          <ProfileItem label="Имя" value={userData && userData.name} icon={<MaterialIcons name="account-circle" size={24} color="white" />} />
-          <ProfileItem label="Почта" value={userData && userData.email} icon={<MaterialIcons name="email" size={24} color="white" />} />
-          <ProfileItem label="Пароль" value={userData && userData.password} secureTextEntry icon={<AntDesign name="lock1" size={24} color="white" />} />
-          <ProfileItem label="Вес" value={userData && userData.weight} icon={<MaterialCommunityIcons name="weight-kilogram" size={24} color="white" />} />
-          <ProfileItem label="Рост" value={userData && userData.height} icon={<MaterialCommunityIcons name="human-male-height" size={24} color="white" />} />
-          <ProfileItem label="Цель диеты" value={userData && userData.goal} icon={<MaterialIcons name="food-bank" size={24} color="white" />} />
-          <ProfileItem label="Эмоциональное состояние" value={userData && userData.emotionalState} icon={<MaterialIcons name="emoji-emotions" size={24} color="white" />} />
-          <ProfileItem label="Ментальное состояние" value={userData && userData.mentalState} icon={<FontAwesome6 name="brain" size={24} color="white" />} />
-          <ProfileItem label="Физическая активность" value={userData && userData.physicalActivity} icon={<FontAwesome5 name="running" size={24} color="white" />} />
-        </View>
-      </View>
       </ScrollView>
     </>
   );

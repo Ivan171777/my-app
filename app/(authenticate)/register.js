@@ -16,7 +16,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-const db = SQLite.openDatabase("myapp.db");
+const db = SQLite.openDatabase("user-myapp.db");
 
 const register = () => {
   const [name, setName] = useState("");
@@ -34,24 +34,30 @@ const register = () => {
   const handleRegister = () => {
     db.transaction(tx => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, password TEXT);`
+        'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, password TEXT, weight REAL, height REAL, goal TEXT, emotionalState TEXT, mentalState TEXT, physicalActivity TEXT);',
       );
     });
-
+  
     const userData = [name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity];
-
+  
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+        'INSERT INTO users (name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         userData,
         (tx, results) => {
           if (results.rowsAffected > 0) {
-            Alert.alert("Registration successful", "You have been registered successfully");
+            Alert.alert("Регистрация успешна", "Вы успешно зарегистрированы");
             setEmail("");
             setPassword("");
             setName("");
+            setWeight("");
+            setHeight("");
+            setgoal("");
+            setemotionalState("");
+            setmentalState("");
+            setphysicalActivity("");
           } else {
-            Alert.alert("Registration failed", "An error occurred during registration");
+            Alert.alert("Ошибка регистрации", "Произошла ошибка во время регистрации");
           }
         },
         error => {
@@ -60,6 +66,7 @@ const register = () => {
       );
     });
   };
+  
 
   return (
     <><View style={{ backgroundColor: "white" }}>
