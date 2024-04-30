@@ -9,9 +9,6 @@ import moment from "moment";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as SQLite from 'expo-sqlite';
 import 'moment/locale/ru';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "expo"
 
 const db = SQLite.openDatabase('my-app.db');
 
