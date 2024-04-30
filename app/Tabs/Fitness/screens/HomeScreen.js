@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, SafeAreaView, Image,ScrollView } from "react-na
 import React ,{useContext} from "react";
 import FitnessCards from "../components/FitnessCards";
 import { FitnessItems } from "C:/Users/Ivan/build/my-app/app/Tabs/Fitness/Context";
-import { LineChart } from "react-native-chart-kit";
 import { BarChart } from "react-native-chart-kit";
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -57,16 +56,6 @@ const HomeScreen = () => {
     
 
     <ScrollView style={{ marginTop: 0, backgroundColor: "white" }}>
-    <View style={{
-          marginTop: 10,
-        }}>
-          <Text style={{ marginHorizontal: 30, color: "black", fontWeight: "regular", fontSize: 14 }}>
-          Сводная статистика упражнений
-        </Text>
-        <Entypo style={{ marginHorizontal: 10, color: "black", marginTop: -15}}
-        name="bar-graph" size={14} color="black" />
-        
-          </View> 
         
         <View
           style={{
@@ -74,8 +63,27 @@ const HomeScreen = () => {
             padding: 20,
             height: "100%",
             width: "100%",
-          }}
-        >
+          }}>
+          
+        <View
+          style={{
+             justifyContent: "center",
+              alignItems: "center"  ,
+              margin: 10,}}>         
+              <MaterialCommunityIcons name="archive-star-outline" size={50} color="black" />
+              <Text>Сеты тренировок</Text>
+        </View>
+          <FitnessCards />
+
+          <View
+          style={{
+             justifyContent: "center",
+              alignItems: "center"  ,
+              margin: 10,}}>       
+              <Entypo name="bar-graph" size={50} color="black" />
+              <Text>Сводная статистика упражнений</Text>
+        </View>
+
           <View style={{marginTop: 10, flex: 1, justifyContent: "center", alignItems: "center"}}>
         <BarChart
           data={data}
@@ -122,16 +130,9 @@ const HomeScreen = () => {
           }}
         />
       </View>
-        <View
-          style={{
-             justifyContent: "center",
-              alignItems: "center"  ,
-              margin: 10,}}>         
-              <MaterialCommunityIcons name="archive-star-outline" size={50} color="black" />
-              <Text>Сеты тренировок</Text>
+
         </View>
-          <FitnessCards />
-        </View>
+        
       </ScrollView></>
   );
 };
