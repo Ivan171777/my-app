@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { LineChart } from 'react-native-chart-kit';
+import { Dimensions } from 'react-native';
 
 const db = SQLite.openDatabase('my-app.db');
 
@@ -43,18 +44,23 @@ const GoalsScreen = () => {
 
     return () => {};
   }, []);
-
+  
   const fetchCategories = () => {
+    const lastWeekDate = new Date();
+    lastWeekDate.setDate(lastWeekDate.getDate() - 7);
+    const formattedDate = lastWeekDate.toISOString().slice(0, 10);
+  
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT category, COUNT(*) as count FROM tasktodos GROUP BY category',
-        [],
+        'SELECT category, COUNT(*) as count FROM tasktodos WHERE status = ? AND date >= ? GROUP BY category',
+        ['completed', formattedDate],
         (_, { rows: { _array } }) => {
           setCategories(_array);
         }
       );
     });
   };
+  
 
   const loadUserInputs = () => {
     db.transaction(tx => {
@@ -149,10 +155,14 @@ const GoalsScreen = () => {
         'SELECT date, averagePercentage FROM inputsummary',
         [],
         (_, { rows: { _array } }) => {
-          _array.forEach(({ date, averagePercentage }) => {
+          // Отбираем только последние 7 записей
+          const lastSevenEntries = _array.slice(-7);
+          
+          lastSevenEntries.forEach(({ date, averagePercentage }) => {
             dates.push(date);
             percentages.push(averagePercentage);
           });
+
           setChartData({ dates, percentages });
         },
         (_, error) => {
@@ -198,61 +208,38 @@ const GoalsScreen = () => {
         <Text>Средний процент из всех категорий: {averagePercentage}%</Text>
       </View>
 
-      <SummaryTable summaryData={summaryData} />
+      {/* Заменяем SummaryTable на компонент LineChart */}
+      
+      <LineChart
+        data={{
+          labels: chartData.dates,
+          datasets: [
+            {
+              data: chartData.percentages,
+            },
+          ],
+        }}
+        width={Dimensions.get("window").width - 40} // Ширина графика равна ширине экрана
+        height={220}
+        yAxisLabel="%"
+        chartConfig={{
+          backgroundColor: '#ffffff',
+          backgroundGradientFrom: '#ffffff',
+          backgroundGradientTo: '#ffffff',
+          decimalPlaces: 2,
+          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          style: {
+            borderRadius: 16,
+          },
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16,
+        }}
+      />
     </View>
   );
 };
-
-const SummaryTable = ({ summaryData }) => (
-  <View style={styles.tableContainer}>
-    <View style={styles.tableHeader}>
-      <Text style={styles.headerText}>Прошлая дата</Text>
-      <Text style={styles.headerText}>Прошлый средний процент</Text>
-      <Text style={styles.headerText}>Новая дата</Text>
-      <Text style={styles.headerText}>Новый средний процент</Text>
-    </View>
-    {summaryData.map(({ id, date, averagePercentage }, index) => (
-      <View key={id} style={index % 2 === 0 ? styles.evenRow : styles.oddRow}>
-        <Text style={styles.cellText}>{date}</Text>
-        <Text style={styles.cellText}>{averagePercentage}%</Text>
-        <Text style={styles.cellText}>{index === summaryData.length - 1 ? '-' : summaryData[index + 1].date}</Text>
-        <Text style={styles.cellText}>{index === summaryData.length - 1 ? '-' : summaryData[index + 1].averagePercentage}%</Text>
-      </View>
-    ))}
-  </View>
-);
-
-const styles = StyleSheet.create({
-  tableContainer: {
-    marginTop: 20,
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-  },
-  headerText: {
-    fontWeight: 'bold',
-  },
-  evenRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    backgroundColor: '#e0e0e0',
-  },
-  oddRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-  },
-  cellText: {
-    flex: 1,
-    textAlign: 'center',
-  },
-});
 
 export default GoalsScreen;
