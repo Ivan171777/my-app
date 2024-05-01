@@ -12,16 +12,16 @@ const FitnessCards = () => {
     <View>
       {FitnessData.map((item, key) => (
         <Pressable
-        onPress={() => navigation.navigate("Workout",{
-          excersises:item.excersises,
-          id:item.id,
-        })}
+          onPress={() => navigation.navigate("Workout", {
+            excersises: item.excersises,
+            id: item.id,
+          })}
           style={{ alignItems: "center", justifyContent: "center", margin: 10 }}
           key={key}
         >
 
-        <View
-          style={{ width: "95%", height: 140, borderRadius: 10, backgroundColor: "black"}}/>
+          <View
+            style={{ width: "95%", height: 140, borderRadius: 10, backgroundColor: "black" }} />
 
           <Text
             style={{
@@ -34,8 +34,8 @@ const FitnessCards = () => {
             }}
           >
             {item.name}
-            </Text>
-            <Text
+          </Text>
+          <Text
             style={{
               position: "absolute",
               color: "white",
@@ -62,15 +62,15 @@ const FitnessCards = () => {
           </Text>
 
           <MaterialCommunityIcons
-            style={{ position: "absolute", color: "white", bottom: 15, left:20 }}
+            style={{ position: "absolute", color: "white", bottom: 15, left: 20 }}
             name="lightning-bolt"
             size={24}
             color="white"
           />
-          <AntDesign 
-            style={{position: "absolute", color: "white", bottom: 30, right:20}} 
-            name="Trophy" 
-            size={80}  
+          <AntDesign
+            style={{ position: "absolute", color: "white", bottom: 30, right: 20 }}
+            name="Trophy"
+            size={80}
           />
         </Pressable>
       ))}

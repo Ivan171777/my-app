@@ -25,4 +25,4 @@ const FitnessContext = ({ children }) => {
   );
 };
 
-export {FitnessContext,FitnessItems}
+export { FitnessContext, FitnessItems }

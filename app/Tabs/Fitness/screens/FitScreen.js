@@ -31,11 +31,11 @@ const FitScreen = () => {
   } = useContext(FitnessItems);
   console.log(completed, "completed excersise");
   return (
-    <SafeAreaView 
-    style={{ backgroundColor: "white", height: "100%"}}>
+    <SafeAreaView
+      style={{ backgroundColor: "white", height: "100%" }}>
       <Image
         style={{ width: "80%", height: 200, marginTop: 100, marginLeft: 40, borderRadius: 15, borderColor: "black", borderWidth: 2 }}
-        
+
         source={{ uri: current.image }}
       />
 

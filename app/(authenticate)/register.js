@@ -37,9 +37,9 @@ const register = () => {
         'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, password TEXT, weight REAL, height REAL, goal TEXT, emotionalState TEXT, mentalState TEXT, physicalActivity TEXT);',
       );
     });
-  
+
     const userData = [name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity];
-  
+
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO users (name, email, password, weight, height, goal, emotionalState, mentalState, physicalActivity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -66,13 +66,13 @@ const register = () => {
       );
     });
   };
-  
+
 
   return (
     <><View style={{ backgroundColor: "white" }}>
       <View style={{ marginTop: 40, backgroundColor: "white", alignItems: "center" }}>
         <Text style={{ fontSize: 30, fontWeight: "600", color: "black" }}>
-        Добро пожаловать в приложение Grind!
+          Добро пожаловать в приложение Grind!
         </Text>
         <Entypo style={{ marginTop: 40 }} name="sports-club" size={200} color="black" />
       </View>
@@ -81,7 +81,7 @@ const register = () => {
         <KeyboardAvoidingView>
           <View style={{ alignItems: "center" }}>
             <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 70 }}>
-            Зарегистрироваться
+              Зарегистрироваться
             </Text>
           </View>
 
@@ -103,15 +103,15 @@ const register = () => {
                 size={22}
                 color="gray" />
               <TextInput
-              value={name}
-              onChangeText={(text) => setName(text)}
-              style={{
+                value={name}
+                onChangeText={(text) => setName(text)}
+                style={{
                   color: "gray",
                   marginVertical: 10,
                   width: 300,
                   fontSize: 17,
                 }}
-              placeholder="Введите имя" />
+                placeholder="Введите имя" />
             </View>
 
             <View
@@ -131,15 +131,15 @@ const register = () => {
                 size={22}
                 color="gray" />
               <TextInput
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              style={{
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+                style={{
                   color: "gray",
                   marginVertical: 10,
                   width: 300,
                   fontSize: 17,
                 }}
-              placeholder="Введите почту" />
+                placeholder="Введите почту" />
             </View>
             <View
               style={{
@@ -158,16 +158,16 @@ const register = () => {
                 size={22}
                 color="gray" />
               <TextInput
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-              style={{
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+                style={{
                   color: "gray",
                   marginVertical: 10,
                   width: 300,
                   fontSize: email ? 17 : 17,
                 }}
-              secureTextEntry={true}
-              placeholder="Введите пароль" />
+                secureTextEntry={true}
+                placeholder="Введите пароль" />
             </View>
 
             <View style={{ marginTop: 30 }} />

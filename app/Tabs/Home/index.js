@@ -27,7 +27,7 @@ const Index = () => {
     const unsubscribe = navigation.addListener('focus', () => {
       getUserTodos();
     });
-  
+
     return unsubscribe;
   }, [navigation]);
 
@@ -41,7 +41,7 @@ const Index = () => {
       );
     });
 
-    
+
 
     getUserTodos();
   }, []);
@@ -49,7 +49,7 @@ const Index = () => {
   useEffect(() => {
     getUserTodos();
   }, [selectedDate]);
-  
+
 
   const getUserTodos = () => {
     const selectedDateFormatted = selectedDate.format("D MMMM");
@@ -59,7 +59,7 @@ const Index = () => {
         [selectedDateFormatted],
         (_, { rows: { _array } }) => {
           setTodos(_array);
-  
+
           const pending = _array.filter(todo => todo.status !== "completed");
           const completed = _array.filter(todo => todo.status === "completed");
           setPendingTodos(pending);
@@ -69,7 +69,7 @@ const Index = () => {
       );
     });
   };
-  
+
 
   const addTodo = () => {
     const selectedDateFormatted = selectedDate.format("D MMMM");
@@ -128,6 +128,7 @@ const Index = () => {
     setSelectedDate(moment(date));
     hideDatePicker();
     getUserTodos(); // Обновление задач после выбора даты
+
   };
 
   const selectedDateFormat = selectedDate.locale('ru').format("D MMMM");
@@ -136,7 +137,7 @@ const Index = () => {
   return (
     <>
 
-    
+
       <View
         style={{
           flexDirection: "row",
@@ -148,29 +149,35 @@ const Index = () => {
         }}
       >
 
-<Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
+        <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
           Задачи
         </Text>
 
-        <View style={{marginTop: 5, marginHorizontal: -107, alignItems: "center", backgroundColor: "white"}}>
-        <TouchableOpacity onPress={showDatePicker}>
-          <View style={{padding: 10, width: 160, alignItems: "center", backgroundColor: "black", borderRadius: 25}}>
-            <Text style={{fontSize: 16, fontWeight: 600, color: "white"}}>{selectedDateFormat}</Text>
-          </View>
-          
-        </TouchableOpacity>
+        <View style={{ marginTop: 5, marginHorizontal: -107, alignItems: "center", backgroundColor: "white" }}>
+          <TouchableOpacity onPress={showDatePicker}>
+            <View style={{ padding: 10, width: 160, alignItems: "center", backgroundColor: "black", borderRadius: 25 }}>
+              <Text style={{ fontSize: 16, fontWeight: 600, color: "white" }}>{selectedDateFormat}</Text>
+            </View>
+
+          </TouchableOpacity>
         </View>
-        
-        <Pressable 
-          style={{marginTop: 5, marginHorizontal: 70}} 
+
+        <Pressable
+          style={{ marginTop: 5, marginHorizontal: 70 }}
           //onPress={() => setModalVisible(!isModalVisible)}>
-          onPress={() =>navigation.navigate('task')}>
+          //onPress={() =>navigation.navigate('task')}>
+          //onPress={() => navigation.navigate('task', { selectedDate })}>
+          onPress={() => navigation.navigate('task', { selectedDate: selectedDate.format() })}>
+
+
+
+
           <AntDesign name="pluscircle" size={35} color="black" />
         </Pressable>
-      </View>  
+      </View>
 
       <DateTimePickerModal
-        style={{backgroundColor: "white" }}
+        style={{ backgroundColor: "white" }}
         isVisible={isDatePickerVisible}
         mode="date"
         textColor="black"
@@ -288,7 +295,7 @@ const Index = () => {
               }}
             >
               <FontAwesome name="tasks" size={200} color="black" />
-              
+
               <Text
                 style={{
                   fontSize: 16,
@@ -297,10 +304,12 @@ const Index = () => {
                   textAlign: "center",
                 }}
               >
-                Нет задач... Добавьте новую задачу! 
+                Нет задач... Добавьте новую задачу!
               </Text>
               <Pressable
-                onPress={() =>navigation.navigate('task')}
+                //onPress={() =>navigation.navigate('task')}
+                //onPress={() => navigation.navigate('task', { selectedDate })}
+                onPress={() => navigation.navigate('task', { selectedDate: selectedDate.format() })}
                 style={{ marginTop: 15 }}
               >
                 <AntDesign name="pluscircle" size={40} color="black" />

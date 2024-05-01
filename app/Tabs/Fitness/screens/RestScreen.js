@@ -24,10 +24,10 @@ const RestScreen = () => {
   });
   return (
     <SafeAreaView
-    style={{ backgroundColor: "white", height: "100%"}}>
+      style={{ backgroundColor: "white", height: "100%" }}>
       <View style={{ width: "80%", height: "50%", marginLeft: 45, borderRadius: 30, marginTop: 50, backgroundColor: "black", alignContent: "center" }}>
-          <MaterialIcons style={{marginHorizontal: 70, marginVertical: 90}} name="restore" size={190} color="white" />
-        </View>
+        <MaterialIcons style={{ marginHorizontal: 70, marginVertical: 90 }} name="restore" size={190} color="white" />
+      </View>
 
       <Text
         style={{

@@ -45,7 +45,7 @@ const Profile = () => {
         },
         (_, error) => console.log('Error fetching completed tasks:', error)
       );
-      
+
       tx.executeSql(
         'SELECT COUNT(*) AS totalTodos FROM tasktodos',
         [],
@@ -121,58 +121,59 @@ const Profile = () => {
         </Text>
       </View>
       <View style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
-        
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            <MaterialIcons name="account-circle" size={60} color="black" />
-            <View>
-              <Text style={{ fontSize: 16, fontWeight: "600" }}>
-                {userData.name}
-              </Text>
-              <Text style={{ fontSize: 15, color: "gray", marginTop: 4 }}>
-                {userData.email}
-              </Text>
-            </View>
+
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <MaterialIcons name="account-circle" size={60} color="black" />
+          <View>
+            <Text style={{ fontSize: 16, fontWeight: "600" }}>
+              {userData.name}
+            </Text>
+            <Text style={{ fontSize: 15, color: "gray", marginTop: 4 }}>
+              {userData.email}
+            </Text>
           </View>
+        </View>
 
 
-        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25}}>
+        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25 }}>
           <Pressable onPress={() => navigation.navigate('person')}>
-            <MaterialIcons style={{marginLeft: 10}} name="account-circle" size={24} color="white" />
+            <MaterialIcons style={{ marginLeft: 10 }} name="account-circle" size={24} color="white" />
             <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
               Личные данные
             </Text>
           </Pressable>
         </View>
 
-        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25}}>
+        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25 }}>
           <Pressable onPress={() => navigation.navigate('goals')}>
-            <MaterialIcons style={{marginLeft: 10}} name="switch-account" size={24} color="white" />
+            <Entypo style={{ marginLeft: 10 }} name="bar-graph" size={22} color="white" />
+
             <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
-              Персональные цели
+              Характеристика целей
             </Text>
           </Pressable>
         </View>
 
-        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25}}>
+        <View style={{ marginTop: 15, backgroundColor: "black", padding: 10, width: 410, borderRadius: 25 }}>
           <Pressable onPress={() => navigation.navigate('taskscharts')}>
-          <Entypo style={{marginLeft: 10}} name="circular-graph" size={24} color="white" />
+            <Entypo style={{ marginLeft: 10 }} name="circular-graph" size={24} color="white" />
             <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "white" }}>
               Сводка по задачам
             </Text>
           </Pressable>
         </View>
 
-        
-                
-        
 
+
+
+        {/* 
         <View style={{ marginTop: 15, backgroundColor: "white", padding: 9, width: 410, borderRadius: 25, borderWidth: 1}}>
           <Entypo style={{marginLeft: 10}} name="bar-graph" size={24} color="black" />
           <Text style={{ marginTop: -26, marginLeft: 50, fontSize: 22, color: "black" }}> 
             Статистика
           </Text>
-        </View>
-        
+        </View>*/}
+
       </View>
     </>
   );

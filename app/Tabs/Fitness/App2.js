@@ -9,7 +9,7 @@ export default function App() {
     <FitnessContext>
       <StackNavigator />
     </FitnessContext>
-  ) ;
+  );
 }
 
 const styles = StyleSheet.create({

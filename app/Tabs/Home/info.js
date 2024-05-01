@@ -56,7 +56,7 @@ const Info = () => {
         }}
       >
         <Ionicons name="arrow-back-outline" size={24} color="black" onPress={() => navigation.goBack()} />
-        <Ionicons style={{ marginRight: 5 }} name="checkmark-done" size={24} color="black" onPress={updateTitle}/>
+        <Ionicons style={{ marginRight: 5 }} name="checkmark-done" size={24} color="black" onPress={updateTitle} />
       </View>
 
       <TextInput
@@ -86,7 +86,7 @@ const Info = () => {
         </View>
       </View>
 
-      <View style={{ marginTop: 15, marginLeft: 0  }}>
+      <View style={{ marginTop: 15, marginLeft: 0 }}>
         <View
           style={{
             flexDirection: "row",

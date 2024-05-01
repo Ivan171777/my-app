@@ -27,22 +27,31 @@ const Profile = () => {
   }, []);
 
   const fetchData = () => {
+    const startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
+    const today = moment().format('YYYY-MM-DD');
+
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT date, COUNT(*) AS total, SUM(CASE WHEN status = "completed" THEN 1 ELSE 0 END) AS completed FROM tasktodos GROUP BY date ORDER BY date DESC LIMIT 7', // Обновленный запрос с использованием ORDER BY и LIMIT
-        [],
+        'SELECT date, COUNT(*) AS total, SUM(CASE WHEN status = "completed" THEN 1 ELSE 0 END) AS completed FROM tasktodos WHERE date >= ? OR date = ? GROUP BY date ORDER BY date DESC',
+        [startDate, today],
         (_, { rows: { _array } }) => {
-          const reversedArray = _array.reverse(); // Переворачиваем массив, чтобы отображать данные в хронологическом порядке
+          console.log("_array:", _array); // Выводим полученные данные в консоль
+          const reversedArray = _array.reverse();
+          console.log("reversedArray:", reversedArray); // Выводим перевернутый массив в консоль
           const labels = reversedArray.map(item => moment(item.date, 'DD MMMM').format('DD.MM'));
+          console.log("labels:", labels); // Выводим массив меток в консоль
           const totalData = reversedArray.map(item => item.total || 0);
+          console.log("totalData:", totalData); // Выводим массив общих данных в консоль
           const completedData = reversedArray.map(item => item.completed || 0);
+          console.log("completedData:", completedData); // Выводим массив выполненных данных в консоль
           setChartData({ labels, totalData, completedData });
         },
         (_, error) => console.log('Error fetching data:', error)
       );
     });
   };
-  
+
+
 
   // Проверка на нулевые или недопустимые значения
   const isValidData = (data) => {
@@ -61,12 +70,12 @@ const Profile = () => {
         }}
       >
         <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 26 }}>
-        Сводка по задачам
+          Сводка по задачам
         </Text>
       </View>
-    
+
       <View style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
-        <View style={{ marginVertical: 12}}>
+        <View style={{ marginVertical: 12 }}>
           <View
             style={{
               flexDirection: "row",
@@ -85,7 +94,7 @@ const Profile = () => {
               }}
             >
               <Text
-                style={{ color: "#008000", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
+                style={{ color: "#008000", alignItems: "center", fontSize: 16, fontWeight: "bold" }}
               >
                 Выполненные: {isValidData(chartData.completedData) ? chartData.completedData.reduce((a, b) => a + b, 0) : 0}
               </Text>
@@ -100,14 +109,14 @@ const Profile = () => {
               }}
             >
               <Text
-                style={{ color: "white", alignItems: "center" , fontSize: 16, fontWeight: "bold" }}
+                style={{ color: "white", alignItems: "center", fontSize: 16, fontWeight: "bold" }}
               >
                 Всего задач: {isValidData(chartData.totalData) ? chartData.totalData.reduce((a, b) => a + b, 0) : 0}
               </Text>
             </View>
           </View>
         </View>
-        <View style={{backgroundColor: "black", padding: 10, borderRadius: 25}}>
+        <View style={{ backgroundColor: "black", padding: 10, borderRadius: 25 }}>
           <LineChart // Измененный компонент
             data={{
               labels: chartData.labels,
@@ -124,6 +133,7 @@ const Profile = () => {
                 },
               ],
             }}
+            /**/
             width={Dimensions.get("window").width - 40} // from react-native
             height={220}
             yAxisInterval={6} // optional
@@ -147,7 +157,7 @@ const Profile = () => {
             style={{
               borderRadius: 16
             }}
-          />   
+          />
         </View>
       </View>
     </>

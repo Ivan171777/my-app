@@ -46,7 +46,7 @@ const PlannerScreen = () => {
       const formattedDate = date.format('D MMMM');
       const tasksForDate = menuData.filter(menu => moment(menu.date, 'D MMMM').isSame(date, 'day')); // Фильтруем задачи для текущей даты
       const isCurrentDate = date.isSame(currentDate, 'day');
-  
+
       weekDates.push(
         <View key={`${key}_${formattedDate}`}>
           <View
@@ -82,10 +82,11 @@ const PlannerScreen = () => {
               {date.format('ddd')}
             </Text>
           </View>
-          
+
           <View
             style={[
-              {backgroundColor: 'white',
+              {
+                backgroundColor: 'white',
                 borderRadius: 8,
                 padding: 10,
                 width: '85%',
@@ -96,12 +97,13 @@ const PlannerScreen = () => {
             ]}
           >
             <Text style={{
-            fontSize: 12,
-            fontWeight: '600',marginBottom: 5}} >Задачи</Text>
-            
-            <View style ={{marginLeft: 310, marginTop: -15}}>
-            <Ionicons name="checkmark-done" size={10} color="black"/>
-          </View >
+              fontSize: 12,
+              fontWeight: '600', marginBottom: 5
+            }} >Задачи</Text>
+
+            <View style={{ marginLeft: 310, marginTop: -15 }}>
+              <Ionicons name="checkmark-done" size={10} color="black" />
+            </View >
             {tasksForDate.length > 0 ? (
               tasksForDate.map((task, index) => (
                 <Text
@@ -115,18 +117,18 @@ const PlannerScreen = () => {
                     fontWeight: '600',
                     textDecorationLine: task.status === 'completed' ? 'line-through' : 'none',
 
-                    
+
                   }}
                 >
                   <View>
-                    <FontAwesome style={{marginRight: 5}} name="circle" size={10} color="gray" />
+                    <FontAwesome style={{ marginRight: 5 }} name="circle" size={10} color="gray" />
                   </View>
-                  
-                    {task.title}
+
+                  {task.title}
                 </Text>
               ))
             ) : (
-              
+
               <Text
                 style={{
                   textAlign: "left",
@@ -138,9 +140,9 @@ const PlannerScreen = () => {
                 }}
               >
                 Нет задач
-                
+
               </Text>
-              
+
             )}
           </View>
         </View>
@@ -148,7 +150,7 @@ const PlannerScreen = () => {
     }
     return weekDates;
   };
-  
+
 
   const renderWeeks = () => {
     const weeks = [];

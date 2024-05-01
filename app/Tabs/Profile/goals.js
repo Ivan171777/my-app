@@ -43,14 +43,14 @@ const GoalsScreen = () => {
     loadUserInputs();
     loadSummaryData();
 
-    return () => {};
+    return () => { };
   }, []);
-  
+
   const fetchCategories = () => {
     const lastWeekDate = new Date();
     lastWeekDate.setDate(lastWeekDate.getDate() - 7);
     const formattedDate = lastWeekDate.toISOString().slice(0, 10);
-  
+
     db.transaction(tx => {
       tx.executeSql(
         'SELECT category, COUNT(*) as count FROM tasktodos WHERE status = ? AND date >= ? GROUP BY category',
@@ -61,7 +61,7 @@ const GoalsScreen = () => {
       );
     });
   };
-  
+
 
   const loadUserInputs = () => {
     db.transaction(tx => {
@@ -158,7 +158,7 @@ const GoalsScreen = () => {
         (_, { rows: { _array } }) => {
           // Отбираем только последние 7 записей
           const lastSevenEntries = _array.slice(-7);
-          
+
           lastSevenEntries.forEach(({ date, averagePercentage }) => {
             dates.push(date);
             percentages.push(averagePercentage);
@@ -203,103 +203,104 @@ const GoalsScreen = () => {
         Характеристика целей
       </Text>
     </View>
-    <ScrollView style={{ backgroundColor: "white"}}>
-    <View style={{
-        width: "100%",
-        height: "100%",
-        backgroundColor: "white"}}>
+      <ScrollView style={{ backgroundColor: "white" }}>
+        <View style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "white"
+        }}>
           <Text style={{ marginTop: 5, marginHorizontal: 15, color: "black", fontWeight: "bold", fontSize: 16 }}>
-        Категории
-      </Text>
-
-      <View style={{ marginTop: 5, padding: 2}}>
-        <View style={{padding: 10}}>
-        {categories.map(({ category, count }) => (
-          <View key={category} style={{ marginBottom: 5 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
-              <Text style={{  }}>{category}</Text>
-              <TextInput
-                style={{ marginBottom: -25, color: "white", padding: 15, borderRadius: 25, backgroundColor: "black" }}
-                onChangeText={value => handleInput(category, value)}
-                keyboardType="numeric"
-                value={userInputs[category] ? userInputs[category].toString() : ''} />
-            </View>
-            <View style={styles.progressBarWrapper}>
-              {/* Шкала заполнения */}
-              <View style={[styles.progressBar, { width: `${calculatePercentage(count, userInputs[category])}%` }]} />
-              {/* Текст с процентом */}
-              <Text style={styles.progressBarText}>
-                {calculatePercentage(count, userInputs[category])}%
-              </Text>
-            </View>
-          </View>
-        ))}
-      </View>
-      </View>
-
-      <Text style={{ marginLeft: 15, padding: 1, fontSize: 12, color: "grey"}}>
-        Напротив каждой категории введите сколько бы вы хотели выполнять задач по этой категории в неделю
-      </Text>
-
-
-      <View style={{marginTop: 15,marginBottom: 10, marginHorizontal: 10, alignItems: "center", width: "95%", backgroundColor: "black", borderRadius: 250, padding: 5}}>
-          <Text style={{ padding: 15, marginHorizontal: 10, fontWeight: 600, fontSize: 14, color: "white"}}>
-            <Text> Средний процент совершенствования: {averagePercentage}%</Text>
+            Категории
           </Text>
+
+          <View style={{ marginTop: 5, padding: 2 }}>
+            <View style={{ padding: 10 }}>
+              {categories.map(({ category, count }) => (
+                <View key={category} style={{ marginBottom: 5 }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+                    <Text style={{}}>{category}</Text>
+                    <TextInput
+                      style={{ marginBottom: -25, color: "white", padding: 15, borderRadius: 25, backgroundColor: "black" }}
+                      onChangeText={value => handleInput(category, value)}
+                      keyboardType="numeric"
+                      value={userInputs[category] ? userInputs[category].toString() : ''} />
+                  </View>
+                  <View style={styles.progressBarWrapper}>
+                    {/* Шкала заполнения */}
+                    <View style={[styles.progressBar, { width: `${calculatePercentage(count, userInputs[category])}%` }]} />
+                    {/* Текст с процентом */}
+                    <Text style={styles.progressBarText}>
+                      {calculatePercentage(count, userInputs[category])}%
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <Text style={{ marginLeft: 15, padding: 1, fontSize: 12, color: "grey" }}>
+            Напротив каждой категории введите сколько бы вы хотели выполнять задач по этой категории в неделю
+          </Text>
+
+
+          <View style={{ marginTop: 15, marginBottom: 10, marginHorizontal: 10, alignItems: "center", width: "95%", backgroundColor: "black", borderRadius: 250, padding: 5 }}>
+            <Text style={{ padding: 15, marginHorizontal: 10, fontWeight: 600, fontSize: 14, color: "white" }}>
+              <Text> Средний процент совершенствования: {averagePercentage}%</Text>
+            </Text>
+          </View>
+
+          <Button title="Обновить данные" onPress={handleSubmit} color="black" />
+
+          {/* Заменяем SummaryTable на компонент LineChart */}
+
+          <View style={{ padding: 20 }}>
+            <LineChart
+              data={{
+                labels: chartData.dates.map(date => {
+                  // Преобразование даты в нужный формат (дд:мм)
+                  const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: '2-digit'
+                  });
+                  return formattedDate;
+                }),
+                datasets: [
+                  {
+                    data: chartData.percentages.map(percent => Math.round(percent)), // Округление до целого
+                  },
+                ],
+              }}
+              width={Dimensions.get("window").width - 40} // Ширина графика равна ширине экрана
+              height={220}
+              yAxisLabel="%"
+              chartConfig={{
+                backgroundColor: '#ffffff',
+                backgroundGradientFrom: '#ffffff',
+                backgroundGradientTo: '#ffffff',
+                decimalPlaces: 0, // Устанавливаем 0 для округления до целого
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+                propsForDots: {
+                  r: "4", // Размер точек на графике
+                  strokeWidth: "2", // Толщина обводки точек
+                  stroke: "white" // Цвет обводки точек
+                }
+              }}
+              fromZero={true} // Начать отсчет по оси x с нуля
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 16,
+              }}
+            />
+
+          </View>
+
         </View>
-
-      <Button title="Обновить данные" onPress={handleSubmit} color="black"/>
-
-        {/* Заменяем SummaryTable на компонент LineChart */}
-
-        <View style={{padding: 20}}>
-        <LineChart
-  data={{
-    labels: chartData.dates.map(date => {
-      // Преобразование даты в нужный формат (дд:мм)
-      const formattedDate = new Date(date).toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit'
-      });
-      return formattedDate;
-    }),
-    datasets: [
-      {
-        data: chartData.percentages.map(percent => Math.round(percent)), // Округление до целого
-      },
-    ],
-  }}
-  width={Dimensions.get("window").width - 40} // Ширина графика равна ширине экрана
-  height={220}
-  yAxisLabel="%"
-  chartConfig={{
-    backgroundColor: '#ffffff',
-    backgroundGradientFrom: '#ffffff',
-    backgroundGradientTo: '#ffffff',
-    decimalPlaces: 0, // Устанавливаем 0 для округления до целого
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
-    propsForDots: {
-      r: "4", // Размер точек на графике
-      strokeWidth: "2", // Толщина обводки точек
-      stroke: "white" // Цвет обводки точек
-    }
-  }}
-  fromZero={true} // Начать отсчет по оси x с нуля
-  bezier
-  style={{
-    marginVertical: 8,
-    borderRadius: 16,
-  }}
-/>
-
-          </View>
-          
-          </View>
-          </ScrollView>
-      </>
+      </ScrollView>
+    </>
   );
 };
 
@@ -318,7 +319,7 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: 'black',
     borderRadius: 10,
-    
+
   },
   progressBarText: {
     marginLeft: 10,

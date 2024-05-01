@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, SafeAreaView, Image,ScrollView } from "react-native";
-import React ,{useContext} from "react";
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from "react-native";
+import React, { useContext } from "react";
 import FitnessCards from "../components/FitnessCards";
 import { FitnessItems } from "C:/Users/Ivan/build/my-app/app/Tabs/Fitness/Context";
 import { BarChart } from "react-native-chart-kit";
@@ -9,9 +9,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   const {
-   
+
     minutes,
-  
+
     calories,
 
     workout,
@@ -24,7 +24,7 @@ const HomeScreen = () => {
       {
         data: [workout, minutes],
       },
-      
+
     ],
   };
   const data2 = {
@@ -33,13 +33,13 @@ const HomeScreen = () => {
       {
         data: [calories, minutes],
       },
-      
+
     ],
   };
-  
+
 
   return (
-    
+
     <><View
       style={{
         flexDirection: "row",
@@ -53,10 +53,10 @@ const HomeScreen = () => {
       </Text>
     </View>
 
-    
 
-    <ScrollView style={{ marginTop: 0, backgroundColor: "white" }}>
-        
+
+      <ScrollView style={{ marginTop: 0, backgroundColor: "white" }}>
+
         <View
           style={{
             backgroundColor: "white",
@@ -64,75 +64,77 @@ const HomeScreen = () => {
             height: "100%",
             width: "100%",
           }}>
-          
-        <View
-          style={{
-             justifyContent: "center",
-              alignItems: "center"  ,
-              margin: 10,}}>         
-              <MaterialCommunityIcons name="archive-star-outline" size={50} color="black" />
-              <Text>Сеты тренировок</Text>
-        </View>
+
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              margin: 10,
+            }}>
+            <MaterialCommunityIcons name="archive-star-outline" size={50} color="black" />
+            <Text>Сеты тренировок</Text>
+          </View>
           <FitnessCards />
 
           <View
-          style={{
-             justifyContent: "center",
-              alignItems: "center"  ,
-              margin: 10,}}>       
-              <Entypo name="bar-graph" size={50} color="black" />
-              <Text>Сводная статистика упражнений</Text>
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              margin: 10,
+            }}>
+            <Entypo name="bar-graph" size={50} color="black" />
+            <Text>Сводная статистика упражнений</Text>
+          </View>
+
+          <View style={{ marginTop: 10, flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <BarChart
+              data={data}
+              width={300}
+              height={220}
+              yAxisLabel=""
+              chartConfig={{
+                backgroundGradientFrom: "white",
+                backgroundGradientTo: "white",
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                style: {
+                  borderRadius: 16
+                },
+                propsForDots: {
+                  r: "6",
+                  strokeWidth: "2",
+                  stroke: "#ffa726"
+                }
+              }}
+            />
+          </View>
+          <View style={{ marginTop: 10, flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <BarChart
+              data={data2}
+              width={300}
+              height={220}
+              yAxisLabel=""
+              chartConfig={{
+                backgroundGradientFrom: "white",
+                backgroundGradientTo: "white",
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                style: {
+                  borderRadius: 16
+                },
+                propsForDots: {
+                  r: "6",
+                  strokeWidth: "2",
+                  stroke: "#ffa726"
+                }
+              }}
+            />
+          </View>
+
         </View>
 
-          <View style={{marginTop: 10, flex: 1, justifyContent: "center", alignItems: "center"}}>
-        <BarChart
-          data={data}
-          width={300}
-          height={220}
-          yAxisLabel=""
-          chartConfig={{
-            backgroundGradientFrom: "white",
-            backgroundGradientTo: "white",
-            decimalPlaces: 2,
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            style: {
-              borderRadius: 16
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726"
-            }
-          }}
-        />
-      </View>
-      <View style={{marginTop: 10, flex: 1, justifyContent: "center", alignItems: "center"}}>
-        <BarChart
-          data={data2}
-          width={300}
-          height={220}
-          yAxisLabel=""
-          chartConfig={{
-            backgroundGradientFrom: "white",
-            backgroundGradientTo: "white",
-            decimalPlaces: 2,
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-            style: {
-              borderRadius: 16
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726"
-            }
-          }}
-        />
-      </View>
-
-        </View>
-        
       </ScrollView></>
   );
 };

@@ -7,7 +7,7 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('user-myapp.db');
 
 const ProfileItem = ({ label, value, onChangeText, secureTextEntry }) => (
-  <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10, backgroundColor: "black", borderRadius: 150}}>
+  <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10, backgroundColor: "black", borderRadius: 150 }}>
     <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 20 }}>
       <Text style={{ fontSize: 14, fontWeight: "bold", color: "white", padding: 20 }}>{label}:</Text>
     </View>

@@ -7,7 +7,7 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import React ,{useContext} from "react";
+import React, { useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { FitnessItems } from "../Context";
@@ -17,7 +17,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const WorkOutScreen = () => {
   const route = useRoute();
-//   console.log(route.params);
+  //   console.log(route.params);
   const navigation = useNavigation();
   const {
     completed,
@@ -30,10 +30,10 @@ const WorkOutScreen = () => {
         style={{ backgroundColor: "white", marginTop: 0 }}
       >
         <View style={{ width: "80%", height: 140, marginLeft: 45, borderRadius: 30, marginTop: 50, backgroundColor: "black", alignContent: "center" }}>
-          <AntDesign style={{marginHorizontal: 120, marginVertical: 20}} name="Trophy" size={90} color="white" />
+          <AntDesign style={{ marginHorizontal: 120, marginVertical: 20 }} name="Trophy" size={90} color="white" />
         </View>
-        
-        
+
+
         <Ionicons
           onPress={() => navigation.goBack()}
           style={{ position: "absolute", top: 10, left: 10 }}
@@ -41,38 +41,38 @@ const WorkOutScreen = () => {
           size={28}
           color="black"
         />
-        
+
         <Pressable
-      onPress={() =>  {
-        navigation.navigate("Fit",{
-          excersises:route.params.excersises,
-      })
-      setCompleted([]);
-      }}
-        style={{
-          backgroundColor: "black",
-          padding: 10,
-          marginTop: 40,
-          marginBottom: 40,
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginVertical: 20,
-          width:120,
-          height: 40,
-          borderRadius:6,
-        }}
-      >
-        <Text
+          onPress={() => {
+            navigation.navigate("Fit", {
+              excersises: route.params.excersises,
+            })
+            setCompleted([]);
+          }}
           style={{
-            textAlign: "center",
-            color: "white",
-            fontSize: 15,
-            fontWeight: "600",
+            backgroundColor: "black",
+            padding: 10,
+            marginTop: 40,
+            marginBottom: 40,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginVertical: 20,
+            width: 120,
+            height: 40,
+            borderRadius: 6,
           }}
         >
-          Начало
-        </Text>
-      </Pressable>
+          <Text
+            style={{
+              textAlign: "center",
+              color: "white",
+              fontSize: 15,
+              fontWeight: "600",
+            }}
+          >
+            Начало
+          </Text>
+        </Pressable>
 
         {route.params.excersises.map((item, index) => (
           <Pressable
@@ -85,7 +85,7 @@ const WorkOutScreen = () => {
             />
 
             <View style={{ marginLeft: 10, marginTop: -5 }}>
-              <Text style={{ fontSize: 17, fontWeight: "bold", width:250, color: "black"}}>
+              <Text style={{ fontSize: 17, fontWeight: "bold", width: 250, color: "black" }}>
                 {item.name}
               </Text>
 
@@ -96,7 +96,7 @@ const WorkOutScreen = () => {
             </View>
 
             {completed.includes(item.name) ? (
-              <AntDesign style={{marginLeft:0, marginTop: -55}} name="checksquare" size={24} color="green" />
+              <AntDesign style={{ marginLeft: 0, marginTop: -55 }} name="checksquare" size={24} color="green" />
             ) : (
               null
             )}

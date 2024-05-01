@@ -45,23 +45,23 @@ const login = () => {
 
   return (
     <>
-    <View style={{ backgroundColor: "white"}}>
-        <View style={{ marginTop: 40 , backgroundColor: "white", alignItems: "center"}}>
+      <View style={{ backgroundColor: "white" }}>
+        <View style={{ marginTop: 40, backgroundColor: "white", alignItems: "center" }}>
           <Text style={{ fontSize: 30, fontWeight: "600", color: "black" }}>
-          Добро пожаловать в приложение Grind!
+            Добро пожаловать в приложение Grind!
           </Text>
           <Entypo style={{ marginTop: 40 }} name="sports-club" size={200} color="black" />
         </View>
-        
-    </View>
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
-    >
-        
+
+      </View>
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
+      >
+
         <KeyboardAvoidingView>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 70}}>
-            Войдите в свой аккаунт
+            <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 70 }}>
+              Войдите в свой аккаунт
             </Text>
           </View>
 
@@ -164,7 +164,7 @@ const login = () => {
 
             <Pressable
               onPress={() => router.replace("/register")}
-              style={{ marginTop: 15,}}
+              style={{ marginTop: 15, }}
             >
               <Text style={{ textAlign: "center", fontSize: 15, color: "gray" }}>
                 У вас нет аккаунта? Зарегистрироваться

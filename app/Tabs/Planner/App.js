@@ -1,12 +1,12 @@
 import React from 'react';
-import {  StyleSheet,  useColorScheme,} from 'react-native';
+import { StyleSheet, useColorScheme, } from 'react-native';
 import { ModalPortal } from 'react-native-modals';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import StackNavigatorPlanner from './navigation/StackNavigatorPlanner';
 
 
-function App(){
+function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -15,8 +15,8 @@ function App(){
 
   return (
     <>
-      <StackNavigatorPlanner/>
-      <ModalPortal/>
+      <StackNavigatorPlanner />
+      <ModalPortal />
     </>
   );
 }
