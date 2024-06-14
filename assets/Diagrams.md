@@ -33,7 +33,7 @@
 ### Диаграмма развёртывания (Deployment diagram):
 
 <div id="header" align="center">
-  <img src="https://github.com/Ivan171777/my-app/blob/main/assets/Deployment%20diagram.drawio.png" width="900"/>
+  <img src="https://github.com/Ivan171777/my-app/blob/main/assets/Deployment%20diagram.drawio.png" width="600"/>
 </div>
 
 Диаграмма развёртывания (Deployment diagram) представляет собой структуру физического размещения компонентов программной системы и их взаимосвязи.
